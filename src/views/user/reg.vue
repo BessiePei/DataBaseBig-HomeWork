@@ -89,9 +89,9 @@ export default {
       that.err_password = "";
       that.err_email = "";
       reg({
-        username: this.username,
-        password: this.password,
-        email: this.email,
+        userName: this.username,
+        userPassword: this.password,
+        userEmail: this.email,
       })
         .then((response) => {
           console.log(response.data);
@@ -122,8 +122,8 @@ export default {
     login() {
       var that = this;
       login({
-        username2: this.username2,
-        password2: this.password2,
+        userName: this.username2,
+        userPassword: this.password2,
       })
         .then((Response) => {
           console.log(Response);
