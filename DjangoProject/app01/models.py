@@ -217,9 +217,7 @@ class BlogPicture(models.Model):
     blogPictureId = models.AutoField(primary_key=True)
     blogPicture = models.ImageField(max_length=25, verbose_name='帖子照片',
                                     null=True, default='default.jpg', upload_to=r'blogs/imgs')
-    blogId = models.ForeignKey(Blog, verbose_name='原帖id',
-                               on_delete=models.CASCADE,
-                               related_name='bi_p')
+    blogId = models.ManyToManyField(Blog)
 
     # 自定义表名
     class Meta:
@@ -240,7 +238,8 @@ class BlogLabel(models.Model):
 
 
 class UserDeliverBlog(models.Model):
-    blogId = models.ForeignKey(Blog, verbose_name='帖子id', on_delete=models.CASCADE,
+    blogId = models.ForeignKey(Blog, primary_key=True,
+                               verbose_name='帖子id', on_delete=models.CASCADE,
                                related_name='ubi')
     userId = models.ForeignKey(User, verbose_name='发布者id',
                                on_delete=models.CASCADE, related_name='ub_ui')
@@ -252,8 +251,9 @@ class UserDeliverBlog(models.Model):
         db_table = 'backend_UserDeliverBlog'
 
 
-class MerchantBlog(models.Model):
-    blogId = models.ForeignKey(Blog, verbose_name='帖子id', on_delete=models.CASCADE,
+class MerchantDeliverBlog(models.Model):
+    blogId = models.ForeignKey(Blog, primary_key=True,
+                               verbose_name='帖子id', on_delete=models.CASCADE,
                                related_name='mbi')
     merchantId = models.ForeignKey(Merchant, verbose_name='发布者id',
                                    on_delete=models.CASCADE, related_name='mb_mi')
