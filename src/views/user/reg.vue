@@ -73,9 +73,9 @@ export default {
       err_password2: ""
     }
   },
-  beforeCreate() {
+  /*beforeCreate() {
     document.querySelector('body').setAttribute('style', 'margin:0;')
-  },
+  },*/
   mounted() {
         let script = document.createElement('script');
         script.type = 'text/javascript';
@@ -131,15 +131,15 @@ export default {
             //保存数据到本地存储
             console.log(Response.data.token);
             //同时保存到vuex
-            //this.saveUser(Response.data);
-            //localStorage.setItem('user',{'token':Response.data.token,'id':Response.data.id,'username':Response.data.username});
+            // this.saveUser(Response.data);
+            // localStorage.setItem('user',{'token':Response.data.token,'id':Response.data.id,'username':Response.data.username});
             localStorage.setItem("token", Response.data.token);
             this.$store.dispatch("saveUser", Response.data);
-            //console.log(this.$store.user.id);
+            // console.log(this.$store.user.id);
             this.username2 = "";
             this.password2 = "";
             this.$router.push("/index"); //跳转到首页
-            //alert('登陆成功');
+            alert('登录成功');
           }
         })
         .catch(function (error) {

@@ -10,9 +10,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@chakra-ui/vue": "^0.12.0",
     "axios": "^1.1.3",
     "element-ui": "^2.15.10",
+    "swiper": "^5.2.0",
     "vue": "^2.5.2",
+    "vue-awesome-swiper": "^3.1.3",
     "vue-router": "^3.0.1",
     "vuex": "^3.6.2"
   },

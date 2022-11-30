@@ -7,7 +7,10 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  beforeCreate() {
+    document.querySelector('body').setAttribute('style', 'margin:0;')
+  },
 }
 </script>
 

@@ -38,3 +38,14 @@ export function updatePwd(data) {
     data
   })
 }
+
+
+/* 对于/1/后端需要获取当前登录用户信息进行修改，如果实现不了也可以让前端传id */
+
+export function submitFeedBack(data) {
+  return request({
+    url: '/feedback/',
+    method: 'post',
+    data
+  })
+}
