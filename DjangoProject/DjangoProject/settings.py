@@ -64,7 +64,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 'DIRS': [],
-        'DIRS': [os.path.join(BASE_DIR, 'front/dist')],
+        'DIRS': [os.path.join(BASE_DIR,'front/dist')]
+        ,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,12 +114,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_hw',
         'USER': 'root',
-        'PASSWORD': 'NXGvdnjJbjJS6879',
+        'PASSWORD': 'kll1225', # 原来那个太难记了
         'HOST': '127.0.0.1',
         'POST': 3306,  # 不要这个嘛？
+        'OPTIONS': {
+            "init_command": "SET default_storage_engine='INNODB'"
+        }
     }
 }
-
+DATABASES['default']['OPTIONS']['init_command'] = "SET sql_mode='STRICT_TRANS_TABLES'"#排除错误
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
