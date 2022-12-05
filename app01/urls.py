@@ -1,8 +1,3 @@
-# -*- codeing = utf-8 -*-
-# @Time : 2022/11/21 17:55
-# @Author : llcc
-# @File : urls.py.py
-# @Software : PyCharm
 
 from django.urls import path, include
 from django.views.generic import TemplateView
@@ -11,12 +6,13 @@ from rest_framework.routers import DefaultRouter
 from app01.views import *
 
 router = DefaultRouter()
-router.register('users', UserViewSet)
+router.register('usersList', UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('users/', add_user),
-    # path('users/1/', getUserByID),
-    path('login/', login),
+    path('users/', RegisterView.as_view()),
+    path('login/', LoginView.as_view()),
+    path('canteens/', GoodsView.as_view()), # get post
+    path('canteens/<int:id>', GoodsView.as_view()), # put delete
     path('', TemplateView.as_view(template_name='index.html'))
 ]

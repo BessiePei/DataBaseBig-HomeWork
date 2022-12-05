@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+# from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('api/', include('app01.urls')),  # demo add
     path(r'', TemplateView.as_view(template_name="index.html")),
+    #  token认证
+    path('api/token_auth/', obtain_auth_token)
 ]

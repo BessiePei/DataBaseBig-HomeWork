@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import datetime
 import os
 from pathlib import Path
 
@@ -36,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework.authtoken',
     'corsheaders',
     'rest_framework',
-    'app01'
+    'app01.apps.App01Config'
 ]
 
 MIDDLEWARE = [
@@ -46,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',  # 添加1，注意中间件的添加顺序
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -75,7 +77,32 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'app01.User'		# 重写原有的用户model类
+
 WSGI_APPLICATION = 'DjangoProject.wsgi.application'
+
+REST_FRAMEWORK = {
+    # 权限  ->  - 已经登陆认证的用户可以对数据进行增删改操作，没有登陆认证的只能查看数据。
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication', # 配置验证方式为JWT
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    # # 全局配置分页选项
+    # 'DEFAULT_PAGINATION_CLASS':
+    #     'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 2,
+
+}
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3), #过期时间为3
+    'JWT_AUTH_HEADER_PREFIX':'JWT', # Token 的头为：JWT xxxxxxxxx
+    'JWT_ALLOW_REFRESH':False,  # 不允许刷新
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
