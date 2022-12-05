@@ -56,6 +56,9 @@ export default {
         alert(JSON.stringify(error));
       })
     }
+  },
+  created() {
+    this.getData();
   }
 }
 </script>

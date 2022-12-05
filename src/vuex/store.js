@@ -15,6 +15,7 @@ const mutations = {
     localStorage.setItem('userinfo', value)
   },
   delUser(state) {
+    console.log("here");
     state.userinfo = null;
   },
 }

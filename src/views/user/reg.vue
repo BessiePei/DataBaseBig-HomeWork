@@ -89,13 +89,13 @@ export default {
       that.err_password = "";
       that.err_email = "";
       reg({
-        userName: this.username,
-        userPassword: this.password,
-        userEmail: this.email,
+        username: this.username,
+        password: this.password,
+        email: this.email,
       })
         .then((response) => {
           console.log(response.data);
-          if (response.data.code === 201) {
+          if (response.status === 201) {
             that.$message({
 								message: "注册成功，请直接登录",
 								type: "success",
@@ -122,23 +122,23 @@ export default {
     login() {
       var that = this;
       login({
-        userName: this.username2,
-        userPassword: this.password2,
+        username: this.username2,
+        password: this.password2,
       })
         .then((Response) => {
           console.log(Response);
           if (Response.status === 200) {
             //保存数据到本地存储
-            console.log(Response.data.token);
+            console.log(Response.data);
             //同时保存到vuex
             // this.saveUser(Response.data);
             // localStorage.setItem('user',{'token':Response.data.token,'id':Response.data.id,'username':Response.data.username});
-            localStorage.setItem("token", Response.data.token);
+            localStorage.setItem("userinfo", Response.data);
             this.$store.dispatch("saveUser", Response.data);
             // console.log(this.$store.user.id);
             this.username2 = "";
             this.password2 = "";
-            this.$router.push("/index"); //跳转到首页
+            this.$router.push("/"); //跳转到首页
             alert('登录成功');
           }
         })
