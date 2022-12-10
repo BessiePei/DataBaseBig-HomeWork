@@ -7,7 +7,7 @@ import router from './router'
 import store from './vuex/store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
-import Chakra from "@chakra-ui/vue";
+import Chakra, { CThemeProvider, CColorModeProvider, CReset } from '@chakra-ui/vue'
 // 关闭生产模式下的提示
 Vue.config.productionTip = false
 Vue.use(ElementUI);
@@ -20,5 +20,11 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
-})
+  template: '<App/>',
+  render: (h) => h(CColorModeProvider, [
+    h(CThemeProvider, [
+      h(CReset),
+      h(App)
+    ])
+  ])
+}).$mount()

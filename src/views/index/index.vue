@@ -2,6 +2,7 @@
   <div id="index" class="vpage">
     <myheader></myheader>
     <slider></slider>
+    <user-show></user-show>
     <merchantList></merchantList>
     <hotDishes></hotDishes>
     <myfooter></myfooter>
@@ -14,9 +15,11 @@ import myfooter from "./../app/footer";
 import slider from "./slider";
 import merchantList from './merchantList'
 import hotDishes from './hotDishes'
+import UserShow from "./userShow";
 export default {
   name: "index",
   components: {
+    UserShow,
     myheader,
     myfooter,
     slider,

@@ -68,11 +68,11 @@
 
 <style scoped>
 	.footer {
+    margin-top: 15px;
 		left: 0px;
-		bottom: 0px;
-		position: fixed;
-		/*bottom: -36px;*/
-		width: 100vw;
+    /* bottom: 0px;
+    position: fixed; */
+		width: 100%;
 		height: 36px;
 		opacity: 1;
 		background:  rgba(245, 245, 245, 1);

@@ -28,6 +28,14 @@ export default new Router({
       }
     },
     {
+      path: '/openShopPage',
+      name: 'openShopPage',
+      component: () => import('@/views/user/openShopPage'),
+      meta: {
+        title: "开店界面"
+      }
+    },
+    {
       path: '/search/:content',
       name: 'searchPage',
       component: () => import('@/views/search/searchPage'),
