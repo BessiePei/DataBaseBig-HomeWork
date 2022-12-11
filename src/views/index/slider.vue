@@ -1,18 +1,21 @@
 <template>
   <div class="app-container">
-    <h1>进行中的活动</h1>
+    <h1 class="slider__title">进行中的活动</h1>
     <div class="swiper">
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="activity in lists" :key="activity.activityId">
-          <router-link :to="{name: 'activityPage', params: {id: activity.activityId}}">
             <div class="activity-card">
               <img :src="activity.activityHeadPhoto" alt="activity-picture"/>
+              <div class="activity-content">
               <p>活动名称：{{activity.activityName}}</p>
               <p>活动简介：{{activity.activityBrief}}</p>
               <p>活动时间：{{activity.activityBegin}}~{{activity.activityEnd}}</p>
               <p>活动主办方：{{activity.activityOrganizerName}}</p>
+              </div>
+              <router-link :to="{name: 'activityPage', params: {id: activity.activityId}}">
+                <button class="btn btn_pos">点击进入了解活动详情</button>
+              </router-link>
             </div>
-          </router-link>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
@@ -77,6 +80,64 @@ export default {
 </script>
 
 <style scope>
+  .app-container {
+    /* border: 1px solid black; */
+    width: 50%;
+    max-width: 600px;
+    background: white;
+  }
 
+  .slider__title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .swiper {
+    height: 50vh;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 1px 1px #8c939d;
+  }
+
+  .activity-card {
+    /*border: 1px solid black;*/
+  }
+
+  .activity-content {
+    z-index: 3;
+    position: absolute;
+    top: 4rem;
+    width: 80%;
+    left: 10%;
+    padding: 10px;
+    background-color: rgba(245, 245, 245, 0.8);
+    border: 1px dashed grey;
+  }
+
+  .swiper-pagination {
+    position: absolute;
+    top: calc(50vh - 45px);
+  }
+
+  .btn {
+	background-color: var(--orange);
+	background-image: linear-gradient(90deg, var(--orange) 0%, var(--lightorange) 74%);
+	border-radius: 20px;
+	border: 1px solid var(--orange);
+	color: var(--white);
+	cursor: pointer;
+	font-size: 0.8rem;
+	font-weight: bold;
+	letter-spacing: 0.1rem;
+	padding: 0.5rem;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+  .btn_pos {
+    position: absolute;
+    top: 230px;
+    width: 40%;
+    left: 30%;
+  }
 
 </style>

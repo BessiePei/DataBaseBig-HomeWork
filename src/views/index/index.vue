@@ -1,10 +1,10 @@
 <template>
-  <div id="index" class="vpage">
+  <div id="index">
     <myheader></myheader>
-    <slider></slider>
-    <user-show></user-show>
-    <merchantList></merchantList>
-    <hotDishes></hotDishes>
+      <slider class="slider_pos"></slider>
+      <user-show class="user-show_pos"></user-show>
+      <merchantList class="merchantList_pos"></merchantList>
+      <hotDishes class="dishList_pos"></hotDishes>
     <myfooter></myfooter>
   </div>
 </template>
@@ -30,21 +30,57 @@ export default {
 </script>
 
 <style scoped>
-{
+/*
+* {
   border: 1px solid black;
 }
-  .vpage {
-    margin-top: 10vh;
-    margin-bottom: 36px;
-  }
+*/
   #index {
-    display: flex;
-    flex-direction: column;
     margin-top: 10vh;
-    margin-bottom: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  slider {
-    position: center;
-    margin: auto;
+
+  .slider_pos {
+    order: 1;
+    flex-shrink: 0;
+    margin: 10px 10px 10px 5% ;
+    /* position: absolute;
+    margin: 10px 0;
+    top: 10vh;
+    left: 10%; */
+  }
+
+  .user-show_pos {
+    order: 2;
+    flex-shrink: 0;
+    margin: 10px;
+    /* position: absolute;
+    margin: 10px 0;
+    right: 10%;
+    top: 10vh; */
+  }
+
+  .merchantList_pos {
+    order: 3;
+    flex-shrink: 0;
+    margin: 10px;
+    /* position: absolute;
+    top: calc(10vh + 50vh + 80px);
+    left: 10%; */
+  }
+
+  .dishList_pos {
+    order: 4;
+    flex-shrink: 0;
+    margin: 10px;
+    /* position: absolute;
+    top: calc(10vh + 50vh + 80px);
+    right: 10%; */
+  }
+
+  .footer {
+    order: 5;
   }
 </style>

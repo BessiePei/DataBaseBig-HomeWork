@@ -41,5 +41,13 @@ export default {
   color: #2c3e50;
   margin: 0;
 }
+html {
+  height: 100%;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
 </style>

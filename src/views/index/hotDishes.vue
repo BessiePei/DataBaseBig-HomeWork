@@ -1,15 +1,15 @@
 <template>
   <div id="hot-dishes">
-    <h1> 热门菜品 </h1>
+    <h1 class="title"> 热门菜品 </h1>
     <div class="dishes">
-      <el-card shadow="hover" v-for="dish in lists" :key="dish.dishId">
+      <el-card :body-style="{ padding: '0px',width: '200px'}" shadow="hover" v-for="dish in lists" :key="dish.dishId">
         <router-link :to="{name: 'dishPage', params: {id: dish.dishId}}">
           <img :src="dish.dishPicture" alt="activity-picture"/>
-          <p>菜品名称：{{dish.dishName}}</p>
-          <p>菜品价格：￥{{dish.dishPrice}}</p>
-          <p>菜品销售商家：{{dish.dishSeller}}</p>
-          <p>菜品评分：{{dish.dishStars}}</p>
-          <p>菜品收藏人数：{{dish.dishFollowerCnt}}</p>
+          <span class="name">{{dish.dishName}}</span>
+          <div class="price" >￥{{dish.dishPrice}}</div>
+          <div class="seller">{{dish.dishSeller}}</div>
+          <div class="mark"><i class="el-icon-s-marketing"/>{{dish.dishStars}}</div>
+          <div class="love"><i class="el-icon-star-off" />{{dish.dishFollowerCnt}}</div>
         </router-link>
       </el-card>
     </div>
@@ -57,5 +57,54 @@ export default {
 </script>
 
 <style scoped>
+  #hot-dishes {
+    width: 60%;
+  }
 
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .dishes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  img {
+    width: 100%;
+    height: 200px;
+  }
+
+  .name {
+    float: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 5px;
+  }
+
+  .price {
+    float: right;
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .seller {
+    float: left;
+    color: #8c939d;
+    font-size: 0.8rem;
+    position: relative;
+    top: 1rem;
+    left: -3.5rem;
+    margin: 5px;
+  }
+
+  .mark {
+    float: right;
+  }
+
+  .love {
+    float: right;
+  }
 </style>
