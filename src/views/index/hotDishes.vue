@@ -41,7 +41,7 @@ export default {
       getHotDishes()
         .then((response) => {
           //console.log(response.data);
-          this.lists = response.data.data;
+          this.lists = response.data;
           console.log("hotDishes: " + JSON.stringify(this.lists));
         })
         .catch(function (error) {

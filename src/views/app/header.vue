@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <router-link :to="{path:'/'}"><p class="logo">航食</p></router-link>
+    <router-link :to="{path:'/'}"><img src="static/images/headLogo.png" /></router-link>
     <div class="middle">
       <div class="search">
         <input class="search-text" type="text" placeholder="快来搜索想吃的菜品吧" v-model="search" />
@@ -53,4 +53,8 @@ export default {
 
 <style scoped>
   @import "../../../static/css/header.css";
+  img {
+    height: 25vh;
+  }
+
 </style>

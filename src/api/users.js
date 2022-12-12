@@ -49,3 +49,59 @@ export function submitFeedBack(data) {
     data
   })
 }
+
+export function getUserDish() {
+  return request({
+    url: '/users/1/dishes/',
+    method: 'get'
+  })
+}
+
+export function getUserActivity() {
+  return request({
+    url: '/users/1/activities',
+    method: 'get'
+  })
+}
+
+export function deleteUserDish(id) {
+  return request({
+    url: '/users/1/dishes/' + id,
+    method: 'delete'
+  })
+}
+
+export function deleteUserActivity(id) {
+  return request({
+    url: '/users/1/activities/' + id,
+    method: 'delete'
+  })
+}
+
+export function getUserBlog() {
+  return request({
+    url: '/users/1/blogs',
+    method: 'get'
+  })
+}
+
+export function getUserLoveBlog() {
+  return request({
+    url: '/users/1/loveblogs',
+    method: 'get'
+  })
+}
+
+export function deleteUserBlog(id) {
+  return request({
+    url: '/users/1/blogs/' + id,
+    method: 'delete'
+  })
+}
+
+export function deleteUserLoveBlog(id) {
+  return request({
+    url: '/users/1/loveblogs/' + id,
+    method: 'delete'
+  })
+}
