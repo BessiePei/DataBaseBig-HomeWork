@@ -322,6 +322,7 @@ export default {
       param.append("userPortrait", this.avatar_img);
       updateUsers(param).then((response)=>{
         alert('修改成功');
+        this.$router.go(0);  // 刷新界面
       }).catch(function(error) {
         alert('修改失败');
         console.log(JSON.stringify(error));

@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export function getSlide() {
   return request({
     url: '/slider/',
-    methods: 'get',
+    method: 'get',
   })
 }
 
@@ -15,3 +15,27 @@ export function getActivityById(id) {
     method: 'get',
   })
 }
+
+export function joinIn(id, data) {
+  return request({
+    url: '/activity/' + id + '/join/',
+    method: 'post',
+    data
+  })
+}
+
+export function getActivityRemark(id) {
+  return request({
+    url: '/activity/' + id + '/remark/',
+    method: 'get',
+  })
+}
+
+export function postActivityRemark(id, data) {
+  return request({
+    url: '/activity/' + id + '/remark/',
+    method: 'post',
+    data
+  })
+}
+

@@ -8,7 +8,14 @@
     <div class="btn-grp">
       <router-link :to="{path: '/reg'}"><button class="btn" v-show="!hasLogin">登录/注册</button></router-link>
       <router-link :to="{path: '/openShopPage'}"><button class="btn"  v-show="!hasLogin">开店</button></router-link>
-      <router-link :to="{path: '/profile'}"><button class="btn" v-show="hasLogin">个人主页</button></router-link>
+      <div v-if="hasLogin">
+        <router-link :to="{path: '/profile'}">
+          <button class="btn" v-show="!isMerchant">个人主页</button>
+        </router-link>
+        <router-link :to="{name: 'merchantPage', params: {id: userinfo.merchantId}}">
+          <button class="btn" v-show="isMerchant">商家主页</button>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -21,11 +28,15 @@ export default {
   data() {
     return {
       hasLogin: false,
+      isMerchant: false,
     }
   },
   created() {
     if (this.userinfo) {
       this.hasLogin = true;
+    }
+    if (this.userinfo.isMerchant) {
+      this.isMerchant = true;
     }
   },
   computed: {

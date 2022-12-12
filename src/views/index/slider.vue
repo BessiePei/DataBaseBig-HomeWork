@@ -15,6 +15,7 @@
               <router-link :to="{name: 'activityPage', params: {id: activity.activityId}}">
                 <button class="btn btn_pos">点击进入了解活动详情</button>
               </router-link>
+              <el-button v-show='isMerchant && username === activity.activityOrganizerName' type="danger" icon="el-icon-delete" circle  @click="deleteActivity(activity.activityId)"></el-button>
             </div>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
@@ -27,8 +28,15 @@
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { getSlide } from "@/api/activities"; //引入api里面定义的方法
 import "swiper/css/swiper.css";
+import {getMerchantActivities} from "../../api/merchants";
 export default {
   name: "default",
+  props: {
+    id: {
+      type: Number,
+      default: -1,
+    }
+  },
   data() {
     return {
       swiperOptions: {
@@ -44,6 +52,8 @@ export default {
         },
       },
       lists: [],
+      isMerchant: false,
+      username: '',
     };
   },
   components: {
@@ -52,7 +62,17 @@ export default {
   },
   methods: {
     getData() {
-      getSlide()
+      this.lists.unshift({
+        activityId: 999,
+        activityName: '光盘行动',
+        activityBrief: '让我们一起光盘吧',
+        activityBegin: '2022.11.30',
+        activityEnd: '2022.12.30',
+        activityOrganizerName: '学六食堂xx窗口',
+        activityHeadPhoto: '../../../static/images/poster.png'
+      });
+      if (this.id === -1) {
+        getSlide()
         .then((response) => {
           //console.log(response.data);
           this.lists = response.data.data;
@@ -61,19 +81,24 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      this.lists.unshift({
-        activityId: 999,
-        activityName: '光盘行动',
-        activityBrief: '让我们一起光盘吧',
-        activityBegin: '2022.11.30',
-        activityEnd: '2022.12.30',
-        activityOrganizerName: '学六食堂',
-        activityHeadPhoto: '../../../static/images/poster.png'
-      });
       console.log(this.lists);
+      } else {
+        getMerchantActivities(this.id).then((response) => {
+          //console.log(response.data);
+          this.lists = response.data;
+          console.log("merchant activities " + JSON.stringify(this.lists));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     },
   },
   created() {
+    if (this.$store.state.userinfo) {
+      this.isMerchant = this.$store.state.userinfo.isMerchant;
+      this.username = this.$store.state.userinfo.username;
+    }
     this.getData();
   },
 };

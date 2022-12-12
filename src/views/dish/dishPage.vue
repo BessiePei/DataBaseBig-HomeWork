@@ -10,8 +10,9 @@
     <p>菜品简介：{{dish.dishBrief}}</p>
     <p>菜品口味：{{dish.dishTaste}}</p>
     <p>菜品收藏人数：{{dish.dishFollowerCnt}}</p>
+    <favorite-button :source="'dish'" :id="id"></favorite-button>
     <h1>菜品评论</h1>
-    <p>获取评论，展示评论的组件</p>
+    <remark :source="'dish'" :id="id"></remark>
     <myfooter></myfooter>
   </div>
 </template>
@@ -20,10 +21,14 @@
 import myheader from "./../app/header";
 import myfooter from "./../app/footer";
 import { getDishByID } from "../../api/dishes";
+import Remark from "../app/remark";
+import FavoriteButton from "../app/favoriteButton";
 
 export default {
   name: "dishPage",
   components: {
+    FavoriteButton,
+    Remark,
     myheader,
     myfooter
   },
@@ -66,6 +71,5 @@ export default {
 <style scoped>
   .vpage {
     margin-top: 10vh;
-    margin-bottom: 36px;
   }
 </style>

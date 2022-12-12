@@ -5,21 +5,21 @@ import request from '@/utils/request'
 export function getHotMerChants() {
   return request({
     url: '/hotmerchants/',
-    methods: 'get',
+    method: 'get',
   })
 }
 
 export function getMerChantByID(id) {
   return request({
     url: '/merchant/' + id + '/',
-    methods: 'get',
+    method: 'get',
   })
 }
 
 export function getCanteenByID(id) {
   return request({
     url: '/canteen/' + id + '/',
-    methods: 'get',
+    method: 'get',
   })
 }
 
@@ -35,3 +35,52 @@ export function signUp(data) {
 }
 
 /* 图片上传参考 https://blog.csdn.net/m0_54625720/article/details/115265768  */
+
+
+export function getMerchantActivities(id) {
+  return request({
+    url: '/merchant/' + id + '/activities/',
+    method: 'get'
+  })
+}
+
+export function getMerchantDishes(id) {
+  return request({
+    url: '/merchant/' + id + '/dishes/',
+    method: 'get'
+  })
+}
+
+export function deleteMerchantDish(id) {
+  return request({
+    url: '/merchant/1/dishes/' + id,
+    method: 'delete'
+  })
+}
+
+/* 只有登录的商家才能删除自己发布的菜品，请把1替换成登录的商家 */
+
+export function deleteMerchantActivity(id) {
+  return request({
+    url: '/merchant/1/activities/' + id,
+    method: 'delete'
+  })
+}
+
+/* 说明同上一条 */
+
+export function postDish(data) {
+  return request({
+    url: '/merchant/1/dishes',
+    method: 'post',
+    data
+  })
+}
+
+export function postActivity(data) {
+  return request({
+    url: '/merchant/1/activities',
+    method: 'post',
+    data
+  })
+}

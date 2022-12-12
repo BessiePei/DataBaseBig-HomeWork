@@ -5,14 +5,44 @@ import request from '@/utils/request'
 export function getVisitBlogs() {
   return request({
     url: '/visitorblogs/',
-    methods: 'get',
+    method: 'get',
   })
 }
 
 export function getBlogByID(id) {
   return request({
     url: '/blog/' + id + '/',
-    methods: 'get',
+    method: 'get',
   })
 }
 
+export function sendBlog(data) {
+  return request({
+    url: '/blog/',
+    method: 'post',
+    data
+  })
+}
+
+export function getBlogRemark(id) {
+  return request({
+    url: '/blog/' + id + '/remark/',
+    method: 'get',
+  })
+}
+
+export function postBlogRemark(id, data) {
+  return request({
+    url: '/blog/' + id + '/remark/',
+    method: 'post',
+    data
+  })
+}
+
+export function favoriteBlog(id, data) {
+  return request({
+    url: '/blog/' + id + '/favorite/',
+    method: 'post',
+    data
+  })
+}

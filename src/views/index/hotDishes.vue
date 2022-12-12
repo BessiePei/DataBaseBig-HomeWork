@@ -11,6 +11,7 @@
           <div class="mark"><i class="el-icon-s-marketing"/>{{dish.dishStars}}</div>
           <div class="love"><i class="el-icon-star-off" />{{dish.dishFollowerCnt}}</div>
         </router-link>
+        <el-button v-show='isMerchant && username === dish.dishSeller' type="danger" icon="el-icon-delete" circle  @click="deleteDish(dish.dishId)"></el-button>
       </el-card>
     </div>
   </div>
@@ -18,10 +19,17 @@
 
 <script>
 import {getHotDishes} from '@/api/dishes'
+import {deleteMerchantDish, getMerchantDishes} from "../../api/merchants";
 export default {
   name: "hotDishes",
   components: {
     getHotDishes
+  },
+  props: {
+    id: {
+      type: Number,
+      default: -1,
+    }
   },
   data() {
     return {
@@ -33,12 +41,15 @@ export default {
         dishStars: 1.2,
         dishPicture: '../../../static/images/dish.png',
         dishFollowerCnt: 0,
-      }]
+      }],
+      isMerchant: false,
+      username: '',
     }
   },
   methods: {
     getData() {
-      getHotDishes()
+      if (this.id === -1) {
+        getHotDishes()
         .then((response) => {
           //console.log(response.data);
           this.lists = response.data;
@@ -48,10 +59,35 @@ export default {
           console.log(error);
         });
       console.log(this.lists);
+      } else {
+        getMerchantDishes(this.id).then((response) => {
+          //console.log(response.data);
+          this.lists = response.data;
+          console.log("merchant Dishes: " + JSON.stringify(this.lists));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      console.log(this.lists);
+      }
+    },
+    deleteDish(id) {
+      deleteMerchantDish(id).then((response) => {
+        this.lists = this.lists.filter(function (item) {
+          return item.dishId !== id;
+        });
+      }).catch(function (error){
+        alert("删除失败");
+        console.log(error)
+      })
     }
   },
   created() {
     this.getData();
+    if (this.$store.state.userinfo) {
+      this.isMerchant = this.$store.state.userinfo.isMerchant;
+      this.username = this.$store.state.userinfo.username;
+    }
   }
 }
 </script>

@@ -1,6 +1,21 @@
 <template>
   <div class="header">
-    <router-link :to="{path:'/'}"><img src="static/images/headLogo.png" /></router-link>
+    <c-popover placement="bottom" trigger="hover">
+      <c-popover-trigger>
+        <router-link :to="{path:'/'}">
+          <img src="static/images/headLogo.png" />
+        </router-link>
+      </c-popover-trigger>
+      <c-popover-content w="100px" fontSize="1em">
+        <c-popover-arrow />
+        点击返回首页
+      </c-popover-content>
+    </c-popover>
+    <el-tooltip content="点击返回首页" placement="bottom" effect="light">
+      <router-link :to="{path:'/'}">
+          <img src="static/images/headLogo.png" />
+        </router-link>
+    </el-tooltip>
     <div class="middle">
       <div class="search">
         <input class="search-text" type="text" placeholder="快来搜索想吃的菜品吧" v-model="search" />
@@ -22,8 +37,15 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import {CPopover, CPopoverContent, CPopoverTrigger, CPopoverArrow} from "@chakra-ui/vue";
 export default {
   name: "header",
+  components: {
+    CPopover,
+  CPopoverTrigger,
+  CPopoverContent,
+    CPopoverArrow
+  },
   data() {
     return {
       search: '',
@@ -54,7 +76,7 @@ export default {
 <style scoped>
   @import "../../../static/css/header.css";
   img {
-    height: 25vh;
+    height: 10vh;
   }
 
 </style>

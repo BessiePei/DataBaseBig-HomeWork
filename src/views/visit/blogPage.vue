@@ -9,8 +9,9 @@
     <p>帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
     <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
     <p>帖子发布时间：{{blog.blogDeliverTime}}</p>
+    <favorite-button :source="'blog'" :id="id"></favorite-button>
     <h1>帖子评论</h1>
-    <p>获取帖子评论的组件，需要后端数据</p>
+    <remark :source="'blog'" :id="id"></remark>
     <myfooter></myfooter>
   </div>
 </template>
@@ -19,10 +20,12 @@
 import myheader from "./../app/header";
 import myfooter from "./../app/footer";
 import { getBlogByID } from "../../api/blogs";
+import Remark from "../app/remark";
 
 export default {
   name: "blogPage",
   components: {
+    Remark,
     myheader,
     myfooter
   },

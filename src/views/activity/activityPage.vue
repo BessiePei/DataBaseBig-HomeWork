@@ -12,8 +12,25 @@
     <p>活动内容： {{activity.activityContent}}</p>
     <p>活动参与人数： {{activity.activityPersonCnt}}</p>
     <p>活动发帖人员：{{activity.activityPerson}}</p>
-    <p>这里加一个发帖组件，获取关于这个活动的帖子！需要后端的列表信息。</p>
+    <button @click="dialogVisible=true">参加活动</button>
+    <remark :source="'activity'" :id="id"></remark>
     <myfooter></myfooter>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+      center>
+      <el-form>
+      <el-text>本平台只提供活动展示界面，具体活动参与方式与参与奖励等请见活动界面活动详情。活动最终解释权归活动主办方所有。本平台不承担任何法律责任。</el-text>
+      <el-form-item label=" " required>
+        <el-checkbox v-model="checked">我已知悉并同意。</el-checkbox>
+      </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submit">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -21,9 +38,13 @@
 import myheader from "./../app/header";
 import myfooter from "./../app/footer";
 import { getActivityById } from "@/api/activities"
+import {joinIn} from "../../api/activities";
+import {mapGetters} from "vuex";
+import Remark from "../app/remark";
 export default {
   name: "activityPage",
   components: {
+    Remark,
     myheader,
     myfooter
   },
@@ -43,6 +64,8 @@ export default {
         activityPerson: '',
         activityPersonCnt: 0,
       },
+      dialogVisible: false,
+      checked: false,
     }
   },
   methods: {
@@ -56,6 +79,27 @@ export default {
           this.activity = response.data;
         })
       }
+    },
+    submit() {
+      if (this.checked) {
+        joinIn(this.id, this.userinfo).then((response) => {
+          //console.log(response.data);
+          alert('参与成功');
+        })
+        .catch(function (error) {
+          alert('参与失败');
+          console.log(error);
+        });
+      } else {
+        alert('请先勾选同意');
+      }
+
+    },
+    computed: {
+      /* ES6 使用辅助函数mapGetters，将组件中的方法映射为score.getters调用 */
+      ...mapGetters({
+        userinfo: "userinfo",
+      })
     }
   },
   created() {

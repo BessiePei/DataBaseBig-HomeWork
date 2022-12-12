@@ -5,14 +5,37 @@ import request from '@/utils/request'
 export function getHotDishes() {
   return request({
     url: '/hotdishes/',
-    methods: 'get',
+    method: 'get',
   })
 }
 
 export function getDishByID(id) {
   return request({
     url: '/dish/' + id + '/',
-    methods: 'get',
+    method: 'get',
+  })
+}
+
+export function getDishRemark(id) {
+  return request({
+    url: '/dish/' + id + '/remark/',
+    method: 'get',
+  })
+}
+
+export function postDishRemark(id, data) {
+  return request({
+    url: '/dish/' + id + '/remark/',
+    method: 'post',
+    data
+  })
+}
+
+export function favoriteDish(id, data) {
+  return request({
+    url: '/dish/' + id + '/favorite/',
+    method: 'post',
+    data
   })
 }
 
