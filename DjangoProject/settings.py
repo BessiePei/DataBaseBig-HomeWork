@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework.authtoken',
+    'django_filters',
     'corsheaders',
     'rest_framework',
     'app01.apps.App01Config'
@@ -64,7 +65,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 'DIRS': [],
-        'DIRS': [os.path.join(BASE_DIR,'front/dist')]
+        'DIRS': [os.path.join(BASE_DIR, 'front/dist')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -78,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'app01.User'		# 重写原有的用户model类
+# AUTH_USER_MODEL = 'app01.MerchantOrUser'		# 重写原有的用户model类
 
 WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 
@@ -89,24 +90,33 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication', # 配置验证方式为JWT
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        'app01.auth.CsrfExemptSessionAuthentication',
     ],
 
-    # # 全局配置分页选项
-    # 'DEFAULT_PAGINATION_CLASS':
-    #     'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 2,
+    # 全局配置分页选项
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
 
+    # 过滤器的默认配置
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 }
 
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3), #过期时间为3
-    'JWT_AUTH_HEADER_PREFIX':'JWT', # Token 的头为：JWT xxxxxxxxx
-    'JWT_ALLOW_REFRESH':False,  # 不允许刷新
-}
+# JWT_AUTH = {
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),  # 过期时间为3
+#     'JWT_AUTH_HEADER_PREFIX': 'JWT',  # Token 的头为：JWT xxxxxxxxx
+#     'JWT_ALLOW_REFRESH': False,  # 不允许刷新
+# }
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload/')
+MEDIA_URL = '/upload/'  # 这个是在浏览器上访问该上传文件的url的前缀
 
 # todo 把默认的sqllite3数据库换成我们的mysql数据库
 DATABASES = {
@@ -114,15 +124,16 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_hw',
         'USER': 'root',
-        'PASSWORD': 'kll1225', # 原来那个太难记了
+        'PASSWORD': 'NXGvdnjJbjJS6879',  # 原来那个太难记了
+        # 'PASSWORD': 'kll1225', # 原来那个太难记了
         'HOST': '127.0.0.1',
-        'POST': 3306,  # 不要这个嘛？
+        'PORT': 3306,  # 不要这个嘛？
         'OPTIONS': {
             "init_command": "SET default_storage_engine='INNODB'"
         }
     }
 }
-DATABASES['default']['OPTIONS']['init_command'] = "SET sql_mode='STRICT_TRANS_TABLES'"#排除错误
+DATABASES['default']['OPTIONS']['init_command'] = "SET sql_mode='STRICT_TRANS_TABLES'"  # 排除错误
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
