@@ -103,7 +103,7 @@ export default {
           }
         })
         .catch(function (error) {
-          console.log("reg" + error);
+          console.log(error);
           alert("注冊失敗");
           if ("non_field_errors" in error) {
             that.error = error.non_field_errors[0];

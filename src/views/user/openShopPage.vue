@@ -186,7 +186,7 @@ export default {
       )
         .then((Response) => {
           console.log(Response);
-          if (Response.status === 200) {
+          if (Response.status === 201) {
             //保存数据到本地存储
             console.log(Response.data);
             //同时保存到vuex

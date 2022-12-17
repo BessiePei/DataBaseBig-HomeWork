@@ -36,7 +36,7 @@ export function signUp(data) {
 
 /* 图片上传参考 https://blog.csdn.net/m0_54625720/article/details/115265768  */
 
-
+// todo ---------------------------------------------
 export function getMerchantActivities(id) {
   return request({
     url: '/merchant/' + id + '/activities/',
@@ -53,7 +53,7 @@ export function getMerchantDishes(id) {
 
 export function deleteMerchantDish(id) {
   return request({
-    url: '/merchant/1/dishes/' + id,
+    url: '/merchant/1/dishes/' + id + '/',
     method: 'delete'
   })
 }
@@ -62,7 +62,7 @@ export function deleteMerchantDish(id) {
 
 export function deleteMerchantActivity(id) {
   return request({
-    url: '/merchant/1/activities/' + id,
+    url: '/merchant/1/activities/' + id+'/',
     method: 'delete'
   })
 }
@@ -71,7 +71,7 @@ export function deleteMerchantActivity(id) {
 
 export function postDish(data) {
   return request({
-    url: '/merchant/1/dishes',
+    url: '/merchant/dishes/',
     method: 'post',
     data
   })
@@ -79,7 +79,7 @@ export function postDish(data) {
 
 export function postActivity(data) {
   return request({
-    url: '/merchant/1/activities',
+    url: '/merchant/activities/',
     method: 'post',
     data
   })

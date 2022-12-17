@@ -33,7 +33,7 @@ export function updateUsers(data) {
 
 export function updatePwd(data) {
   return request({
-    url: '/users/1/',
+    url: '/changePassword/',
     method: 'patch',
     data
   })
@@ -59,49 +59,49 @@ export function getUserDish() {
 
 export function getUserActivity() {
   return request({
-    url: '/users/1/activities',
+    url: '/users/1/activities/',
     method: 'get'
   })
 }
 
 export function deleteUserDish(id) {
   return request({
-    url: '/users/1/dishes/' + id,
+    url: '/users/1/dishes/' + id+ '/',
     method: 'delete'
   })
 }
 
 export function deleteUserActivity(id) {
   return request({
-    url: '/users/1/activities/' + id,
+    url: '/users/1/activities/' + id+ '/',
     method: 'delete'
   })
 }
 
 export function getUserBlog() {
   return request({
-    url: '/users/1/blogs',
+    url: '/users/1/blogs/',
     method: 'get'
   })
 }
 
 export function getUserLoveBlog() {
   return request({
-    url: '/users/1/loveblogs',
+    url: '/users/1/loveblogs/',
     method: 'get'
   })
 }
 
 export function deleteUserBlog(id) {
   return request({
-    url: '/users/1/blogs/' + id,
+    url: '/users/1/blogs/' + id+ '/',
     method: 'delete'
   })
 }
 
 export function deleteUserLoveBlog(id) {
   return request({
-    url: '/users/1/loveblogs/' + id,
+    url: '/users/1/loveblogs/' + id + '/',
     method: 'delete'
   })
 }

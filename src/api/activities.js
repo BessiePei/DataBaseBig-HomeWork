@@ -33,7 +33,7 @@ export function getActivityRemark(id) {
 
 export function postActivityRemark(id, data) {
   return request({
-    url: '/activity/' + id + '/remark/',
+    url: '/activity/' + id + '/postRemark/',
     method: 'post',
     data
   })
