@@ -199,7 +199,7 @@ class UserRegisterView(APIView):
         if serializer.is_valid():
             user_ab = serializer.save()
             print(user_ab)
-            user = MyUser.objects.create(user_ab=user_ab, username=request.data['username'])
+            user = MyUser.objects.create(user_ab=user_ab, username=request.data['username'], isMerchant=False)
             # user = authenticate(username=request.data.get('username'), password=request.data.get('password'))
             # login(request, user)
             serializer = UserSerializer(user)
@@ -223,9 +223,10 @@ class LoginView(APIView):
         if user_ab is not None:
             login(request, user_ab)
             print(request.user)
-            user = MyUser.objects.get(user_ab=user_ab)
-            serializer = UserSerializer(user)
-            return Response(data=serializer.data, status=status.HTTP_200_OK)
+            ser = LoginSerializer(user_ab)
+            # user = MyUser.objects.get(user_ab=user_ab)
+            # serializer = UserSerializer(user)
+            return Response(data=ser.data, status=status.HTTP_200_OK)
         else:
             return Response({"detail": "登录失败。"}, status.HTTP_401_UNAUTHORIZED)
 

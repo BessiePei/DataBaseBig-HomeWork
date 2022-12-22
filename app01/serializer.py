@@ -4,6 +4,9 @@ from django.contrib.auth import password_validation
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
+from app01.activities.serializer import ActivitySerializer
+from app01.blogs.serializer import BlogSerializer
+from app01.dishes.serializer import DishesSerializer
 from app01.models import *
 
 
@@ -21,6 +24,22 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
         fields = '__all__'
+
+
+class LoginSerializer(serializers.ModelSerializer):
+    isMerchant = serializers.SerializerMethodField()
+
+    # id = serializers.SerializerMethodField()
+    # username = serializers.SerializerMethodField()
+
+    class Meta:
+        model = UserModel
+        fields = ['id', 'username', 'isMerchant']
+
+    def get_isMerchant(self, instance):
+        if MyUser.objects.get(user_ab_id=instance.id):
+            return False
+        return True
 
 
 class MerchantSerializer(serializers.ModelSerializer):
@@ -89,8 +108,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # exclude = ["userFavoriteMerchantId", "userFavoriteDishId", "userActivityId"]
 
-    # def get_user_password(self, instance):
-    #     return instance.user_ab.password
+    # def get_userActivities(self, instance):
+    #     return instance.userPortrait.url if instance.userPortrait else None
+    userFavoriteBlogs = BlogSerializer(many=True)
+    userFavoriteMerchants = MerchantSerializer(many=True)
+    userActivities = ActivitySerializer(many=True)
+    userFavoriteDishes = DishesSerializer(many=True)
 
 
 class FeedbackSerializer(serializers.ModelSerializer):

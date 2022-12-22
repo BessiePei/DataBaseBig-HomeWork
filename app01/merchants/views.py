@@ -18,7 +18,7 @@ from rest_framework import viewsets, status
 
 from app01.activities.serializer import ActivitySerializer
 from app01.dishes.serializer import DishesSerializer
-from app01.merchants.serializer import MerchantSerializer, CanteenSerializer, MerchantActivitiesSerializer
+from app01.merchants.serializer import MerchantSerializer, MerchantActivitiesSerializer
 from app01.models import Merchant, Canteen, Activity, Dish
 from app01.mypage import MyPage
 from app01.permissions import IsNotAuthenticated

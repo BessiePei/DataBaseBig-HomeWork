@@ -44,7 +44,7 @@ class Activity(models.Model):
     user_ab = models.ForeignKey(UserModel, verbose_name='活动发起者', on_delete=models.CASCADE)
     activityName = models.CharField(max_length=30, verbose_name='活动名称')
     activityBrief = models.CharField(max_length=30, verbose_name='活动简介')
-    activityContent = models.FileField(verbose_name='活动详情', upload_to=user_directory_path)
+    activityContent = models.CharField(max_length=300, verbose_name='活动详情')
     activityHeadPhoto = models.ImageField(verbose_name='活动头图', upload_to=user_directory_path,
                                           null=True, default='default.jpg')
     activityBegin = models.DateField(verbose_name='活动开始时间', auto_now_add=True)
@@ -72,7 +72,7 @@ class Merchant(models.Model):
     merchantId = models.AutoField(primary_key=True)
     user_ab = models.OneToOneField(UserModel, on_delete=models.CASCADE, verbose_name="用户")
     isMerchant = models.BooleanField(verbose_name='是否是商家',
-                                     choices=[(True, '是'), (False, '否')])
+                                     choices=[(True, '是'), (False, '否')],default=False)
     merchantName = models.CharField(max_length=30, verbose_name='窗口名', unique=True)
     merchantPassword = models.CharField(max_length=25, verbose_name='窗口登录密码')
     merchantPortrait = models.ImageField(verbose_name='窗口头像', upload_to=user_directory_path)  # 不能为空
@@ -154,6 +154,8 @@ class Blog(models.Model):
 class MyUser(models.Model):
     id = models.AutoField(primary_key=True)
     user_ab = models.OneToOneField(UserModel, on_delete=models.CASCADE, verbose_name="用户")  # primary_key=True,
+    isMerchant = models.BooleanField(verbose_name='是否是商家',
+                                     choices=[(True, '是'), (False, '否')])
     username = models.CharField(max_length=45, verbose_name='用户昵称', unique=True)
     # userExpense = models.FloatField(verbose_name="用户的支出金额", default=0.0)
     userSignature = models.CharField(max_length=45, verbose_name='用户个性签名',
@@ -307,26 +309,8 @@ class FeedBack(models.Model):
     # poster = models.ForeignKey(UserModel, verbose_name="发布者", on_delete=models.CASCADE)   # 匿名或实名
     content = models.CharField(max_length=300, verbose_name="用户反馈")
     commentDeliverTime = models.DateTimeField(verbose_name='发布时间', auto_now_add=True)
-# class CommentReplyComment(models.Model):
-#     commentId = models.ForeignKey(Comment, verbose_name='评论id',
-#                                   on_delete=models.CASCADE, related_name='crc_ci')
-#     replyCommentId = models.ForeignKey(Comment, primary_key=True, verbose_name='回评id',
-#                                        on_delete=models.CASCADE, related_name='crc_rci')
 
 
-# # 用户与评论
-# class UserDeliverOrReceivedComments(models.Model):
-#     commentId = models.ForeignKey(Comment, primary_key=True, verbose_name='帖子id',
-#                                   on_delete=models.CASCADE, related_name='uc_ci')
-#     userId = models.ForeignKey(MyUser, verbose_name='用户id',
-#                                on_delete=models.CASCADE, related_name='uc_ui')
-#     commentSort = models.IntegerField(verbose_name='评论性质',
-#                                       choices=((0, '发布'), (1, '收到')))
-
-
-# 窗口与评论
-# class MerchantDeliverOrReceivedComments(models.Model):
-#     commentId = models.ForeignKey(Comment, primary_key=True, verbose_name='帖子id',
-#                                   on_delete=models.CASCADE, related_name='mc_ci')
-#     merchantId = models.ForeignKey(Merchant, verbose_name='窗口id',
-#                                    on_delete=models.CASCADE, related_name='mc_mi')
+class ClassifyUserFavoriteDishes(models.Model):
+    merchantName = models.CharField(max_length=30, verbose_name="所属商家名称")
+    dishesCnt = models.IntegerField(verbose_name="收藏菜品数", default=0)

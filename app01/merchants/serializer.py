@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from app01.activities.serializer import ActivitySerializer
-from app01.models import Merchant, Canteen
+from app01.models import Merchant
 
 
 class MerchantSerializer(serializers.ModelSerializer):
@@ -18,9 +18,3 @@ class MerchantActivitiesSerializer(serializers.ModelSerializer):
         # fields = ['merchantActivities']
         fields = '__all__'
 
-
-
-class CanteenSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Canteen
-        fields = '__all__'

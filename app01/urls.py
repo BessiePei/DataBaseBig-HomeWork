@@ -14,6 +14,7 @@ urlpatterns = [
     # path('', include('app01.comments.urls')),
     path('', include('app01.dishes.urls')),
     path('', include('app01.merchants.urls')),
+    path('', include('app01.statistics.urls')),
     path('users/', UserRegisterView.as_view()),
     path('merchants/', MerchantRegisterView.as_view()),
     path('login/', LoginView.as_view()),
