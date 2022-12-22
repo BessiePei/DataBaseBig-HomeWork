@@ -37,7 +37,8 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'isMerchant']
 
     def get_isMerchant(self, instance):
-        if MyUser.objects.get(user_ab_id=instance.id):
+
+        if MyUser.objects.filter(user_ab_id=instance.id) is None:
             return False
         return True
 
