@@ -39,3 +39,10 @@ export function favoriteDish(id, data) {
   })
 }
 
+export function searchContent(content) {
+  return request({
+    url: '/search/' + content + '/',
+    method: 'get',
+  })
+}
+

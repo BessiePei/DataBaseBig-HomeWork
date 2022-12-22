@@ -5,7 +5,7 @@
       <el-card :body-style="{ padding: '0px' }" shadow="hover" v-for="merchant in lists" :key="merchant.merchantId">
         <router-link :to="{name: 'merchantPage', params: {id: merchant.merchantId}}">
           <div class="card-content">
-            <div class="rank">{{merchant.merchantRank}}</div>
+            <div class="rank">{{merchant.merchantFollowerCnt}}</div>
           <div class="mName">{{merchant.merchantName}}</div>
           </div>
         </router-link>
@@ -26,7 +26,7 @@ export default {
       lists: [{
         merchantId: 999,
         merchantName: '学一食堂xx窗口',
-        merchantRank: '100',
+        merchantFollowerCnt: 0,
       }],
     }
   },
@@ -35,7 +35,7 @@ export default {
       getHotMerChants()
         .then((response) => {
           //console.log(response.data);
-          this.lists = response.data.data;
+          this.lists = response.data;
           console.log("hotMerChants: " + JSON.stringify(this.lists));
         })
         .catch(function (error) {

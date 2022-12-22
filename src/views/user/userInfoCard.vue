@@ -1,10 +1,9 @@
 <template>
   <div class="user-card">
       <img :src="info.userPortrait"/>
-      <p>用户名：{{info.userName}}</p>
+      <p>用户名：{{info.username}}</p>
       <p>个性签名： {{info.userSignature}}</p>
       <p>性别： {{info.userSex}}</p>
-      <p>学号： {{info.userNumber}}</p>
       <p>年级： {{info.userGrade}}</p>
       <p>偏好：{{info.userPrefer}}</p>
   </div>
@@ -19,11 +18,8 @@ export default {
     return {
       info: {
         userId: 0,
-        userName: 'HangFood',
-        userPassword: '',
-        userEmail: '',
+        username: 'HangFood',
         userSignature: 'I love buaa food!',
-        userNumber: '19521025',
         userSex: '男',
         userGrade: '本科',
         userPortrait: '../../../static/images/userPortrait.png',

@@ -105,3 +105,11 @@ export function deleteUserLoveBlog(id) {
     method: 'delete'
   })
 }
+
+
+export function getChart() {
+  return request({
+    url: '/chart/',
+    methods: 'get'
+  })
+}

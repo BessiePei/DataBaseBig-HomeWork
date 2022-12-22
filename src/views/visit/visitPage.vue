@@ -106,7 +106,7 @@ export default {
         private: false,
         picture: null,
       },
-      options: ['菜肴分享','美食地点分享','日常分享','其他'],
+      options: ['菜肴分享','美食地点分享','活动分享','日常分享','其他'],
       disabled: false,
       fileList: [],
     }
@@ -116,7 +116,7 @@ export default {
       getVisitBlogs()
         .then((response) => {
           //console.log(response.data);
-          this.lists = response.data.data;
+          this.lists = response.data;
           console.log("visitBlogs: " + JSON.stringify(this.lists));
         })
         .catch(function (error) {
@@ -133,15 +133,16 @@ export default {
       param.append("blogTitle", this.form.title);
       param.append("blogContent", this.form.content);
       param.append("blogPicture", this.form.picture);
+      param.append("blogPrivate", this.form.private);
       if (this.userinfo) {
         param.append("blogPosterName", this.userinfo.username);
         console.log(param);
         this.$router.go(0);
         sendBlog(param).then((response)=>{
-          alert('修改成功');
+          alert('发帖成功');
           this.$router.go(0);
         }).catch(function(error) {
-          alert('修改失败');
+          alert('发帖失败');
           console.log(JSON.stringify(error));
         })
       } else {

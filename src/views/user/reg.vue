@@ -16,7 +16,7 @@
             </li>
             <input type="password" placeholder="密码" class="input" v-model="password" required/>
             <li class="error_box" id="password_notice">
-              <em>{{err_password}}</em>
+              <em>8-15位，包含大小写，包含数字，否则会注册不成功{{err_password}}</em>
             </li>
             <button class="btn" @click="register">注 册</button>
         </form>
@@ -100,6 +100,12 @@ export default {
 								message: "注册成功，请直接登录",
 								type: "success",
             })
+            /*
+            localStorage.setItem("userinfo", response.data);
+            this.$store.dispatch("saveUser", response.data);
+            this.username = "";
+            this.password = "";
+            this.$router.push("/"); //跳转到首页*/
           }
         })
         .catch(function (error) {

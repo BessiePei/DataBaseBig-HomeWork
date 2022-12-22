@@ -21,6 +21,7 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 # 说明
+
 最初版：mainPages v0只有基础属性展示，不涉及关联关系，没有写弹窗（表单提交），没有进行设计美化，页面所缺功能已在相应界面标注
 
 ## 页面功能新增说明
@@ -35,7 +36,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 - [x] 个人主页：我的菜品、我的活动、我发布的帖子、我收藏的帖子、修改个人信息、修改密码（前四项都可以删除）
 
-- [ ] 搜索结果：==后端要返回什么样的结果？==
+- [x] 搜索结果：==后端要返回什么样的结果？==只查找菜品
 
 - [x] 活动界面：参加活动按钮（用户加入我的活动列表，商家加入商家参与活动列表，公用按钮传了userinfo）
 

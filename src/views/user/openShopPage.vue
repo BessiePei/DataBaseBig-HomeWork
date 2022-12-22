@@ -189,14 +189,16 @@ export default {
           if (Response.status === 201) {
             //保存数据到本地存储
             console.log(Response.data);
+            /*
             //同时保存到vuex
             // this.saveUser(Response.data);
             // localStorage.setItem('user',{'token':Response.data.token,'id':Response.data.id,'username':Response.data.username});
-            localStorage.setItem("userinfo", Response.data);
-            this.$store.dispatch("saveUser", Response.data);
+            localStorage.setItem("minfo", Response.data);
+            this.$store.dispatch("saveMerchant", Response.data);
             // console.log(this.$store.user.id);
             this.$router.push("/"); //跳转到首页
-            alert('注册成功');
+            */
+            alert('注册成功，请返回首页进行登录');
           }
         })
         .catch(function (error) {

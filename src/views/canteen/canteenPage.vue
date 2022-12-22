@@ -38,7 +38,7 @@ export default {
       this.id = this.$route.params.id;
       if (this.$route.params.id) {
         getCanteenByID(this.$route.params.id).then((response) => {
-          this.info=response.data.data;
+          this.info=response.data;
         }).catch (function(error){
           console.log(error);
         })

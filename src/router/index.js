@@ -68,14 +68,6 @@ export default new Router({
       }
     },
     {
-      path: '/canteen/:id',
-      name: 'canteenPage',
-      component: () => import('@/views/canteen/canteenPage'),
-      meta: {
-        title: "食堂主页"
-      }
-    },
-    {
       path: '/dish/:id',
       name: 'dishPage',
       component: () => import('@/views/dish/dishPage'),

@@ -51,7 +51,7 @@ export default {
       this.id = this.$route.params.id;
       if (this.$route.params.id) {
         getBlogByID(this.$route.params.id).then((response) => {
-          console.log(response.data.data);
+          console.log(response.data);
           this.blog = response.data;
         })
       }

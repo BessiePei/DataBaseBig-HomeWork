@@ -5,10 +5,10 @@
       <button @click="postRemark"><i class="el-icon-s-promotion"/>发布评论</button>
     </div>
     <p v-else>请先登录再发表评论哦！</p>
-    <p>相关帖子</p>
+    <p>相关评论</p>
     <div class="blogs">
       <el-card shadow="hover" v-for="remark in lists" :key="remark.commentId">
-        <p>评论发布者：{{remark.commentPosterName}}</p>
+        <p>评论发布者：{{remark.commenter.username}}</p>
         <p>评论时间：{{remark.commentDeliverTime}}</p>
         <p>评论内容：{{remark.commentContent}}</p>
       </el-card>
@@ -37,7 +37,10 @@ export default {
       lists: [{
         commentId: 999,
         commentContent: 'xxx',
-        commentPosterName: '用户名',
+        commenter: {
+          username: "小碗菜21",
+          email: "125346@qq.com"
+        },
         commentDeliverTime: 'xxx-xxx-xx 00:00',
       }],
     }
@@ -46,7 +49,7 @@ export default {
     getBlogRemarkData() {
       getBlogRemark(this.id).then((response) => {
           //console.log(response.data);
-          this.lists = response.data.data;
+          this.lists = response.data;
           console.log("blogRemarks: " + JSON.stringify(this.lists));
         })
         .catch(function (error) {
@@ -57,7 +60,7 @@ export default {
     getDishRemarkData() {
       getDishRemark(this.id).then((response) => {
           //console.log(response.data);
-          this.lists = response.data.data;
+          this.lists = response.data;
           console.log("dishRemarks: " + JSON.stringify(this.lists));
         })
         .catch(function (error) {
@@ -68,7 +71,7 @@ export default {
     getActivityRemarkData() {
       getActivityRemark(this.id).then((response) => {
           //console.log(response.data);
-          this.lists = response.data.data;
+          this.lists = response.data;
           console.log("activityRemarks: " + JSON.stringify(this.lists));
         })
         .catch(function (error) {
@@ -80,7 +83,8 @@ export default {
       if (this.source === 'blog') {
         postBlogRemark(this.id, this.content).then((response)=>{
           alert('提交成功');
-          this.$router.go(0);
+          this.lists.unshift(response.data);
+          // this.$router.go(0);
         }).catch(function(error) {
           alert('提交失败');
           console.log(JSON.stringify(error));
@@ -88,7 +92,8 @@ export default {
       } else if (this.source === 'dish') {
         postDishRemark(this.id, this.content).then((response)=>{
           alert('提交成功');
-          this.$router.go(0);
+          this.lists.unshift(response.data);
+          // this.$router.go(0);
         }).catch(function(error) {
           alert('提交失败');
           console.log(JSON.stringify(error));
@@ -96,20 +101,21 @@ export default {
       } else if (this.source === 'activity') {
         postActivityRemark(this.id, this.content).then((response)=>{
           alert('提交成功');
-          this.$router.go(0);
+          this.lists.unshift(response.data);
+          // this.$router.go(0);
         }).catch(function(error) {
           alert('提交失败');
           console.log(JSON.stringify(error));
         })
       }
       console.log(this.content);
-      var now = new Date();
+      /* var now = new Date();
       this.lists.unshift({
         commentId: 1000,
         commentContent: this.content,
         commentPosterName: this.userinfo.username,
         commentDeliverTime: now.toLocaleTimeString(),
-      })
+      }) */
     }
   },
   created() {

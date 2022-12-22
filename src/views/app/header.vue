@@ -1,6 +1,7 @@
 <template>
   <div class="header">
-    <c-popover placement="bottom" trigger="hover">
+    <img class="bk-photo" src="static/images/header-background.png"/>
+    <!--<c-popover placement="bottom" trigger="hover">
       <c-popover-trigger>
         <router-link :to="{path:'/'}">
           <img src="static/images/headLogo.png" />
@@ -10,7 +11,8 @@
         <c-popover-arrow />
         点击返回首页
       </c-popover-content>
-    </c-popover>
+    </c-popover>-->
+    <div class="h-content">
     <el-tooltip content="点击返回首页" placement="bottom" effect="light">
       <router-link :to="{path:'/'}">
           <img src="static/images/headLogo.png" />
@@ -23,14 +25,24 @@
       </div>
     </div>
     <div class="buttons">
-        <router-link :to="{path: '/visit'}"><button class="router-btn">逛逛</button></router-link>
+        <router-link :to="{path: '/visit'}"><button class="router-btn btn">逛逛</button></router-link>
         <div class="login" v-if="userinfo">
-          <router-link :to="{path: '/profile'}"><button class="router-btn" >用户{{ userinfo.username }}</button></router-link>
+          <div v-if="userinfo.isMerchant">
+            <router-link :to="{name: 'merchantPage', params: {id: userinfo.id}}">
+              <button class="router-btn btn" >用户{{ userinfo.username }}</button>
+            </router-link>
+          </div>
+          <div v-else>
+            <router-link :to="{path: '/profile'}">
+              <button class="router-btn btn" >用户{{ userinfo.username }}</button>
+            </router-link>
+          </div>
           <button @click="logout">退出</button>
         </div>
         <div class="notLogin" v-else>
-          <router-link :to="{path: '/reg'}"><button class="router-btn">登录/注册</button></router-link>
+          <router-link :to="{path: '/reg'}"><button class="router-btn btn">登录/注册</button></router-link>
         </div>
+    </div>
     </div>
   </div>
 </template>
@@ -40,12 +52,6 @@ import { mapGetters } from 'vuex';
 import {CPopover, CPopoverContent, CPopoverTrigger, CPopoverArrow} from "@chakra-ui/vue";
 export default {
   name: "header",
-  components: {
-    CPopover,
-  CPopoverTrigger,
-  CPopoverContent,
-    CPopoverArrow
-  },
   data() {
     return {
       search: '',

@@ -11,7 +11,6 @@
     </router-link>
     <p>活动内容： {{activity.activityContent}}</p>
     <p>活动参与人数： {{activity.activityPersonCnt}}</p>
-    <p>活动发帖人员：{{activity.activityPerson}}</p>
     <button @click="dialogVisible=true">参加活动</button>
     <remark :source="'activity'" :id="id"></remark>
     <myfooter></myfooter>
@@ -61,7 +60,6 @@ export default {
         activityOrganizerId: 999,
         activityHeadPhoto: '../../../static/images/poster.png',
         activityContent: '坚持40天光盘行动并将打卡发送到xxx，凭借打卡记录到学六食堂领取奖品，一等奖xxx,二等将xxx。',
-        activityPerson: '',
         activityPersonCnt: 0,
       },
       dialogVisible: false,
@@ -75,7 +73,7 @@ export default {
       this.id = this.$route.params.id;
       if (this.$route.params.id) {
         getActivityById(this.$route.params.id).then((response) => {
-          console.log(response.data.data);
+          console.log(response.data);
           this.activity = response.data;
         })
       }

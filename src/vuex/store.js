@@ -9,17 +9,20 @@ const state = {
     JSON.parse(localStorage["userinfo"]):[],
 }
 
+/* 同步处理 */
 const mutations = {
   saveUser(state, value) {
     state.userinfo = value;
     localStorage.setItem('userinfo', value)
   },
   delUser(state) {
-    console.log("here");
+    console.log(" start delUser");
     state.userinfo = null;
+    localStorage.clear(); // 清除本地缓存
   },
 }
 
+/* 异步处理 */
 const actions = {
   saveUser(context, value) {
     return context.commit('saveUser',value)

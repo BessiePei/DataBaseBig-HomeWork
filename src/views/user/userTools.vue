@@ -90,8 +90,8 @@
 						</span>
 					</div>
         </el-upload>
-        <p>学号：</p>
-        <input v-model="info.userNumber" />
+        <!--<p>学号：</p>
+        <input v-model="info.userNumber" />-->
         <p>用户年级</p>
         <el-select v-model="info.userGrade" placeholder="请选择">
           <el-option
@@ -111,11 +111,11 @@
       <el-tab-pane label="修改密码" name="myPassword">
         修改密码
         <p>原密码：</p>
-        <input v-model="password.oldPassword" type="password" placeholder="请输入原密码" required/>
+        <input v-model="password.old_password" type="password" placeholder="请输入原密码" required/>
         <p>新密码：</p>
-        <input v-model="password.newPassword" type="password" placeholder="请输入新密码" required/>
+        <input v-model="password.password" type="password" placeholder="请输入新密码" required/>
         <p>确认密码：</p>
-        <input v-model="password.confirmPassword" type="password" placeholder="请再次输入新密码" required/>
+        <input v-model="confirmPassword" type="password" placeholder="请再次输入新密码" required/>
         <button @click="updateUserPassword">提交</button>
       </el-tab-pane>
     </el-tabs>
@@ -152,17 +152,17 @@ export default {
         userPassword: '',
         userEmail: '',
         userSignature: 'I love buaa food!',
-        userNumber: '19521025',
         userSex: '男',
         userGrade: '大一',
         userPortrait: '../../../static/images/userPortrait.png',
         userPrefer: '食物',
       },
       password: {
-        oldPassword: '',
-        newPassword: '',
-        confirmPassword: ''
+        username: '',
+        old_password: '',
+        password: '',
       },
+      confirmPassword: '',
       activities: [{
         activityId: 999,
         activityName: '光盘行动',
@@ -315,7 +315,6 @@ export default {
       param.append("userName", this.info.userName);
       param.append("userEmail", this.info.userEmail);
       param.append("userSignature", this.info.userSignature);
-      param.append("userNumber", this.info.userNumber);
       param.append("userSex", this.info.userSex);
       param.append("userGrade", this.info.userGrade);
       param.append("userPrefer", this.info.userPrefer);
@@ -329,6 +328,7 @@ export default {
       })
     },
     updateUserPassword() {
+      this.password.username = this.$store.getters.userinfo.username;
       updatePwd(this.password).then((response)=>{
         alert('修改成功');
       }).catch(function(error) {
