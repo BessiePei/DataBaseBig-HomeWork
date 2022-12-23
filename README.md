@@ -59,3 +59,16 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - [x] 收藏按钮组件favoriteButton:参数source【String], id[number]主要用于区分获取不同的数据
 - [x] 活动显示组件slider
 - [x] 菜品显示组件hotDishes
+- [x] header设计
+- [x] footer
+- [x] mainPage=slider+hotDishes+merchantList+userShow已完成
+- [x] reg=login/signUp
+- [x] openShopPage
+- [ ] 评论remark
+- [ ] 活动主页
+- [ ] 菜品主页
+- [ ] 帖子主页
+- [ ] 商家主页
+- [ ] 逛逛
+- [x] 搜索结果界面：实现分页/筛选/排序
+- [ ] 个人主页

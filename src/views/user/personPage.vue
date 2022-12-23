@@ -3,7 +3,7 @@
     <myheader></myheader>
     <h1 class="title">个人主页</h1>
     <user-info-card></user-info-card>
-    <div id="main" style="width: 600px; height: 600px"></div>
+    <div id="main" style="width: 400px; height: 400px"></div>
     <user-tools></user-tools>
     <myfooter></myfooter>
   </div>
@@ -29,6 +29,7 @@ export default {
         var chartDom = document.getElementById('main');
         var myChart = echarts.init(chartDom);
         var option;
+        /*
 option = {
   legend: {
     top: 'bottom'
@@ -44,7 +45,7 @@ option = {
   },
   series: [
     {
-      name: 'Nightingale Chart',
+      name: '收藏菜品数据分析图',
       type: 'pie',
       radius: [50, 250],
       center: ['50%', '50%'],
@@ -53,15 +54,48 @@ option = {
         borderRadius: 8
       },
       data: [
-        { value: 40, name: 'rose 1' },
-        { value: 38, name: 'rose 2' },
-        { value: 32, name: 'rose 3' },
-        { value: 30, name: 'rose 4' },
-        { value: 28, name: 'rose 5' },
-        { value: 26, name: 'rose 6' },
-        { value: 22, name: 'rose 7' },
-        { value: 18, name: 'rose 8' }
+        { value: 1, name: 'rose 1' },
+        { value: 2, name: 'rose 2' },
+        { value: 0, name: 'rose 3' },
+        { value: 3, name: 'rose 4' },
+        { value: 4, name: 'rose 5' },
+        { value: 0, name: 'rose 6' },
+        { value: 2, name: 'rose 7' },
+        { value: 5, name: 'rose 8' }
       ]
+    }
+  ]
+};
+*/
+         option = {
+  title: {
+    text: '圆环图的例子',
+    left: 'center',
+    top: 'center'
+  },
+  toolbox: {
+    show: true,
+    feature: {
+      mark: { show: true },
+      dataView: { show: true, readOnly: false },
+      restore: { show: true },
+      saveAsImage: { show: true }
+    }
+  },
+  series: [
+    {
+      type: 'pie',
+      data: [
+        { value: 1, name: 'rose 1' },
+        { value: 2, name: 'rose 2' },
+        { value: 0, name: 'rose 3' },
+        { value: 3, name: 'rose 4' },
+        { value: 4, name: 'rose 5' },
+        { value: 0, name: 'rose 6' },
+        { value: 2, name: 'rose 7' },
+        { value: 5, name: 'rose 8' }
+      ],
+      radius: ['40%', '70%']
     }
   ]
 };
@@ -72,13 +106,15 @@ option = {
         })
 
 
-option && myChart.setOption(option);
+        option && myChart.setOption(option);
+        window.onresize = myChart.resize();
       }
   },
   mounted() {
     console.log("mounted");
-
-    this.echartsInit();
+    setTimeout(() => {
+            this.echartsInit() // 绘制图表
+        }, 0)
   },
 }
 </script>
