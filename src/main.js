@@ -8,7 +8,8 @@ import store from './vuex/store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import Chakra, { CThemeProvider, CColorModeProvider, CReset } from '@chakra-ui/vue'
-
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
 
 
 // 关闭生产模式下的提示

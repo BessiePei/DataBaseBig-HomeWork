@@ -92,7 +92,7 @@ export default {
         getSlide()
         .then((response) => {
           //console.log(response.data);
-          this.lists = response.data.results;
+          this.lists = response.data;
           console.log("slide " + JSON.stringify(this.lists));
         })
         .catch(function (error) {
