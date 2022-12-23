@@ -4,7 +4,7 @@
     <div class="dishes">
       <el-card :body-style="{ padding: '0px',width: '200px'}" shadow="hover" v-for="dish in lists" :key="dish.dishId">
         <router-link :to="{name: 'dishPage', params: {id: dish.dishId}}">
-          <img :src="dish.dishPicture" alt="activity-picture"/>
+          <img :src="$store.getters.imgUrl + dish.dishPicture" alt="activity-picture"/>
           <span class="name">{{dish.dishName}}</span>
           <div class="price" >￥{{dish.dishPrice}}</div>
           <div class="seller">{{dish.dishSeller}}</div>

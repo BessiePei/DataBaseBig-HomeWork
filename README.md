@@ -74,3 +74,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - [ ] 个人主页
 
 商家发表 userinfo
+
+Set-Cookie: sessionId
+
+response.headers
+
+Document.cookie=response.headers.

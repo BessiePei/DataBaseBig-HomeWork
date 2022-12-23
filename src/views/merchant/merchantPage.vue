@@ -2,7 +2,7 @@
   <div class="vpage">
     <myheader></myheader>
     <h1>窗口主页</h1>
-    <img :src="info.merchantPortrait"/>
+    <img :src="$store.getters.imgUrl + info.merchantPortrait"/>
     <p>商家名：{{info.merchantName}}</p>
     <p>商家电话： {{info.merchantPhone}}</p>
     <p>商家评分： {{info.merchantStars}}</p>
@@ -64,7 +64,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialogActivityVisible = false">取 消</el-button>
-      <el-button type="primary" @click="submitActivityForm">确认发布</el-button>
+      <el-button type="primary" @click="submitForm1">确认发布</el-button>
     </div>
     </el-dialog>
 
@@ -155,7 +155,7 @@ export default {
         merchantClose: '19:00',
         merchantFollowerCnt: 0,
       },
-      isMerchant: true,
+      isMerchant: false,
       dialogActivityVisible: false,
       dialogDishVisible: false,
       activity: {

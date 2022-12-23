@@ -1,0 +1,33 @@
+.dish-card {
+  width: 800px;
+  height: 350px;
+  border-radius: 20px;
+  background-color: blanchedalmond;
+  box-shadow: 1px 1px #8c939d;
+  margin: 20px auto;
+  position: relative;
+  top: 20px;
+  display: flex;
+  padding: 20px;
+}
+
+.dishImg {
+  width: 300px;
+  height: 300px;
+}
+
+.dishInf {
+  height: 300px;
+  width: 400px;
+  margin-left: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+
+
+
+
+

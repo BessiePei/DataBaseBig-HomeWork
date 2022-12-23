@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 const state = {
   count: 10,
+  /* imgUrl: "", */
+  imgUrl: "http://localhost:8000/",
   userinfo: localStorage["userinfo"]?
     JSON.parse(localStorage["userinfo"]):null,
 }
@@ -19,6 +21,27 @@ const mutations = {
     console.log(" start delUser");
     state.userinfo = null;
     localStorage.clear(); // 清除本地缓存
+    // 清除全部cookie
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie =
+          name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+      }
+      if (cookies.length > 0) {
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          var eqPos = cookie.indexOf("=");
+          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          var domain = location.host.substr(location.host.indexOf("."));
+          document.cookie =
+            name +
+            "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" +
+            domain;
+        }
+      }
   },
 }
 
@@ -37,6 +60,10 @@ const getters = {
     localStorage.setItem("userinfo", JSON.stringify(state.userinfo));
     return state.userinfo;
   },
+  imgUrl(state) {
+    return state.imgUrl;
+  }
+
 }
 
 const store = new Vuex.Store({

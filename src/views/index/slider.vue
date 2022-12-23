@@ -5,7 +5,7 @@
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="activity in lists" :key="activity.activityId">
             <div class="activity-card">
-              <img :src="activity.activityHeadPhoto" alt="activity-picture"/>
+              <img :src="$store.getters.imgUrl + activity.activityHeadPhoto" alt="activity-picture"/>
               <div class="activity-content">
               <p>活动名称：{{activity.activityName}}</p>
               <p>活动简介：{{activity.activityBrief}}</p>
@@ -92,7 +92,7 @@ export default {
         getSlide()
         .then((response) => {
           //console.log(response.data);
-          this.lists = response.data;
+          this.lists = response.data.results;
           console.log("slide " + JSON.stringify(this.lists));
         })
         .catch(function (error) {

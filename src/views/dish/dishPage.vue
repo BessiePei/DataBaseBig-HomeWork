@@ -1,16 +1,19 @@
 <template>
   <div class="vpage">
     <myheader></myheader>
-    <h1>菜品主页</h1>
-    <img :src="dish.dishPicture" alt="activity-picture"/>
-    <p>菜品名称：{{dish.dishName}}</p>
-    <p>菜品价格：￥{{dish.dishPrice}}</p>
-    <p>菜品销售商家：{{dish.dishSeller}}</p>
-    <p>菜品评分：{{dish.dishStars}}</p>
-    <p>菜品简介：{{dish.dishBrief}}</p>
-    <p>菜品口味：{{dish.dishTaste}}</p>
-    <p>菜品收藏人数：{{dish.dishFollowerCnt}}</p>
-    <favorite-button :source="'dish'" :id="id"></favorite-button>
+    <div class="dish-card">
+      <img class="dishImg" :src="$store.getters.imgUrl + dish.dishPicture" alt="activity-picture"/>
+      <div class="dishInf">
+      <p>菜品名称：{{dish.dishName}}</p>
+      <p>菜品价格：￥{{dish.dishPrice}}</p>
+      <p>菜品销售商家：{{dish.dishSeller}}</p>
+      <p>菜品评分：{{dish.dishStars}}</p>
+      <p>菜品简介：{{dish.dishBrief}}</p>
+      <p>菜品口味：{{dish.dishTaste}}</p>
+      <p>菜品收藏人数：{{dish.dishFollowerCnt}}</p>
+      <favorite-button :source="'dish'" :id="id"></favorite-button>
+      </div>
+    </div>
     <h1>菜品评论</h1>
     <remark :source="'dish'" :id="id"></remark>
     <myfooter></myfooter>
@@ -69,6 +72,7 @@ export default {
 </script>
 
 <style scoped>
+@import "../../../static/css/dishPage.css";
   .vpage {
     margin-top: 10vh;
   }

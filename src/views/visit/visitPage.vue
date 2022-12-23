@@ -8,7 +8,7 @@
     <div class="card-columns">
       <el-card class="card card-pin" shadow="hover" v-for="blog in lists" :key="blog.blogId">
         <router-link :to="{name: 'blogPage', params: {id: blog.blogId}}">
-          <img class="card-img" :src="blog.blogPicture" alt="activity-picture"/>
+          <img class="card-img" :src="$store.getters.imgUrl + blog.blogPicture" alt="activity-picture"/>
           <div class="overlay">
             <h2 class="card-title">{{blog.blogTitle}}</h2>
             <p class="card-info">帖子类型：{{blog.blogLabel}}</p>
@@ -67,8 +67,8 @@
           </el-input>
         </el-form-item>
         <el-form-item label="帖子可见性" required>
-          <el-radio v-model="form.private" label=false>公开</el-radio>
-          <el-radio v-model="form.private" label=true>仅自己可见</el-radio>
+          <el-radio v-model="form.private" label=False>公开</el-radio>
+          <el-radio v-model="form.private" label=True>仅自己可见</el-radio>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -194,6 +194,7 @@ export default {
       param.append("blogContent", this.form.content);
       param.append("blogPicture", this.form.picture);
       param.append("blogPrivate", this.form.private);
+      console.log(this.form.private);
       if (this.userinfo) {
         param.append("blogPosterName", this.userinfo.username);
         console.log(param);

@@ -1,5 +1,5 @@
 <template>
-  <button @click="favor">收藏</button>
+  <button @click="favor" class="loveButton"><i class="el-icon-star-off" />收藏</button>
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
             console.log(JSON.stringify(error));
           })
         } else if (this.source === 'dish') {
-          favoriteDish(this.blog, this.userinfo).then((response) => {
+          favoriteDish(this.id, this.userinfo).then((response) => {
             alert('收藏成功');
             this.$router.go(0);
           }).catch(function (error) {
@@ -51,5 +51,18 @@ export default {
 </script>
 
 <style scoped>
-
+  .loveButton {
+    background-color: var(--orange);
+	  background-image: linear-gradient(90deg, var(--orange) 0%, var(--lightorange) 74%);
+	  border-radius: 20px;
+	  border: 1px solid var(--orange);
+	  color: var(--white);
+	  cursor: pointer;
+	  font-size: 0.8rem;
+	  font-weight: bold;
+	  letter-spacing: 0.1rem;
+	  padding: 0.9rem 4rem;
+	  text-transform: uppercase;
+	  transition: transform 80ms ease-in;
+  }
 </style>

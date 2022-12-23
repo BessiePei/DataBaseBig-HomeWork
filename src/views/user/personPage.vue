@@ -101,12 +101,10 @@ option = {
 };
         getChart().then((response) => {
           option.data = response.data;
+          option && myChart.setOption(option);
         }).catch (function(error){
           console.log(error);
         })
-
-
-        option && myChart.setOption(option);
         window.onresize = myChart.resize();
       }
   },

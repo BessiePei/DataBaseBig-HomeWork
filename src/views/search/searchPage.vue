@@ -17,7 +17,7 @@
       <p v-show="showData.length === 0">没有符合条件的商品</p>
       <el-card :body-style="{ padding: '5px',width: '200px'}" shadow="hover" v-for="dish in showData" :key="dish.dishId" class="dish-item">
         <router-link :to="{name: 'dishPage', params: {id: dish.dishId}}">
-          <img :src="dish.dishPicture" alt="activity-picture"/>
+          <img :src="$store.getters.imgUrl + dish.dishPicture" alt="activity-picture"/>
             <span class="name">{{dish.dishName}}</span>
             <div class="price" >￥{{dish.dishPrice}}</div>
             <div class="seller">{{dish.dishSeller}}</div>

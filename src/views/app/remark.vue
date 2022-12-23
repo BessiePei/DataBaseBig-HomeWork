@@ -1,8 +1,8 @@
 <template>
   <div class="remark">
     <div class="sendRemark" v-if="userinfo">
-      <input v-model="content" placeholder="快来发表你的评论吧" />
-      <button @click="postRemark"><i class="el-icon-s-promotion"/>发布评论</button>
+      <input class="remark-input" v-model="content" placeholder="快来发表你的评论吧" />
+      <button class="send-btn" @click="postRemark"><i class="el-icon-s-promotion"/>发布评论</button>
     </div>
     <p v-else>请先登录再发表评论哦！</p>
     <p>相关评论</p>
@@ -137,5 +137,31 @@ export default {
 </script>
 
 <style scoped>
+  .remark {
+    width: 700px;
+    margin: auto;
+    text-align: left;
+  }
+
+  .remark-input {
+    width: 600px;
+    border: 2px solid var(--orange);
+    border-radius: 10px;
+  }
+
+  .send-btn {
+    background-color: var(--orange);
+    background-image: linear-gradient(90deg, var(--orange) 0%, var(--lightorange) 74%);
+	  border-radius: 20px;
+	  border: 1px solid var(--orange);
+	  color: var(--white);
+	  cursor: pointer;
+	  font-size: 0.8rem;
+	  font-weight: bold;
+	  letter-spacing: 0.1rem;
+	  padding: 5px;
+	  text-transform: uppercase;
+	  transition: transform 80ms ease-in;
+  }
 
 </style>

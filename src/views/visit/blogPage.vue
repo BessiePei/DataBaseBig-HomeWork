@@ -2,7 +2,7 @@
   <div class="vpage">
     <myheader></myheader>
     <h1> 帖子主页 </h1>
-    <img :src="blog.blogPicture" alt="activity-picture"/>
+    <img :src="$store.getters.imgUrl + blog.blogPicture" alt="activity-picture"/>
     <p>帖子名：{{blog.blogTitle}}</p>
     <p>帖子类型：{{blog.blogLabel}}</p>
     <p>发帖人：{{blog.blogPosterName}}</p>

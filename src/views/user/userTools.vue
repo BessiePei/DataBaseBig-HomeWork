@@ -6,7 +6,7 @@
         <p v-show="dishes.length === 0">你还未收藏任何菜品，快去收藏您喜欢的菜品吧！</p>
         <el-card :body-style="{ padding: '0px',width: '200px'}" shadow="hover" v-for="dish in dishes" :key="dish.dishId">
           <router-link :to="{name: 'dishPage', params: {id: dish.dishId}}">
-            <img :src="dish.dishPicture" alt="activity-picture"/>
+            <img :src="$store.getters.imgUrl + dish.dishPicture" alt="activity-picture"/>
             <span class="name">{{dish.dishName}}</span>
             <div class="price" >￥{{dish.dishPrice}}</div>
             <div class="seller">{{dish.dishSeller}}</div>
@@ -21,7 +21,7 @@
         <p v-show="activities.length === 0">你还未参加任何活动，快去参加您感兴趣的活动吧！</p>
         <el-card shadow="hover" v-for="activity in activities" :key="activity.activityId">
           <router-link :to="{name: 'activityPage', params: {id: activity.activityId}}">
-            <img :src="activity.activityHeadPhoto" alt="activity-picture"/>
+            <img :src="$store.getters.imgUrl + activity.activityHeadPhoto" alt="activity-picture"/>
             <p>活动名称：{{activity.activityName}}</p>
             <p>活动简介：{{activity.activityBrief}}</p>
             <p>活动时间：{{activity.activityBegin}}~{{activity.activityEnd}}</p>
@@ -35,7 +35,7 @@
         <p v-show="blogs.length === 0">你还未发布任何帖子，快去逛逛页面发帖吧！</p>
         <el-card shadow="hover" v-for="blog in blogs" :key="blog.blogId">
         <router-link :to="{name: 'blogPage', params: {id: blog.blogId}}">
-          <img :src="blog.blogPicture" alt="activity-picture"/>
+          <img :src="$store.getters.imgUrl + blog.blogPicture" alt="activity-picture"/>
           <p>帖子名：{{blog.blogTitle}}</p>
           <p>帖子类型：{{blog.blogLabel}}</p>
           <p>发帖人：{{blog.blogPosterName}}</p>
@@ -50,7 +50,7 @@
         <p v-show="loveBlogs.length === 0">你还未收藏任何帖子，快去逛逛看吧！</p>
         <el-card shadow="hover" v-for="blog in loveBlogs" :key="blog.blogId">
           <router-link :to="{name: 'blogPage', params: {id: blog.blogId}}">
-            <img :src="blog.blogPicture" alt="activity-picture"/>
+            <img :src="$store.getters.imgUrl + blog.blogPicture" alt="activity-picture"/>
             <p>帖子名：{{blog.blogTitle}}</p>
             <p>帖子类型：{{blog.blogLabel}}</p>
             <p>发帖人：{{blog.blogPosterName}}</p>
@@ -102,8 +102,8 @@
           </el-option>
         </el-select>
         <p>性别：</p>
-        <el-radio v-model="info.userSex" label="男">男</el-radio>
-        <el-radio v-model="info.userSex" label="女">女</el-radio>
+        <el-radio v-model="info.userSex" label=1>男</el-radio>
+        <el-radio v-model="info.userSex" label=0>女</el-radio>
         <p>用户的口味偏好：</p>
         <input type="text" v-model="info.userPrefer" />
         <button @click="updateUserInfo">确认修改信息</button>
@@ -152,7 +152,7 @@ export default {
         userPassword: '',
         userEmail: '',
         userSignature: 'I love buaa food!',
-        userSex: '男',
+        userSex: 1,
         userGrade: '大一',
         userPortrait: '../../../static/images/userPortrait.png',
         userPrefer: '食物',
@@ -312,8 +312,8 @@ export default {
     },
     updateUserInfo() {
       let param = new FormData();  // 创建form对象
-      param.append("userName", this.info.userName);
-      param.append("userEmail", this.info.userEmail);
+      param.append("username", this.info.userName);
+      param.append("email", this.info.userEmail);
       param.append("userSignature", this.info.userSignature);
       param.append("userSex", this.info.userSex);
       param.append("userGrade", this.info.userGrade);

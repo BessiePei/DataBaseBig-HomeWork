@@ -7,7 +7,8 @@ var URL = 'http://localhost:8000/api/'  // localUrl
 // 创建axios实例
 const service = axios.create({
   baseURL: URL,
-  timeout: 6000  // 请求超时时间
+  timeout: 6000,  // 请求超时时间
+  withCredentials: true,
 })
 
 // // request 拦截器

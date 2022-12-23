@@ -1,6 +1,6 @@
 <template>
   <div class="user-card">
-      <img :src="info.userPortrait"/>
+      <img :src="$store.getters.imgUrl + info.userPortrait"/>
       <p>用户名：{{info.username}}</p>
       <p>个性签名： {{info.userSignature}}</p>
       <p>性别： {{info.userSex}}</p>
