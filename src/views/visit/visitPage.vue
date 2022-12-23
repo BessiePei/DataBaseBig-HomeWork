@@ -1,17 +1,21 @@
 <template>
   <div class="vpage">
     <myheader></myheader>
-    <h1>逛逛主页</h1>
-    <button @click="dialogFormVisible = true">发帖<i class="el-icon-s-promotion"/></button>
-    <div class="blogs">
-      <el-card shadow="hover" v-for="blog in lists" :key="blog.blogId">
+    <div class="title-line">
+      <h1 class="titleh">快来逛逛，发现新鲜好玩的贴子吧！</h1>
+      <button @click="dialogFormVisible = true" class="btn">发帖<i class="el-icon-s-promotion"/></button>
+    </div>
+    <div class="card-columns">
+      <el-card class="card card-pin" shadow="hover" v-for="blog in lists" :key="blog.blogId">
         <router-link :to="{name: 'blogPage', params: {id: blog.blogId}}">
-          <img :src="blog.blogPicture" alt="activity-picture"/>
-          <p>帖子名：{{blog.blogTitle}}</p>
-          <p>帖子类型：{{blog.blogLabel}}</p>
-          <p>发帖人：{{blog.blogPosterName}}</p>
-          <p>帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
-          <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
+          <img class="card-img" :src="blog.blogPicture" alt="activity-picture"/>
+          <div class="overlay">
+            <h2 class="card-title">{{blog.blogTitle}}</h2>
+            <p class="card-info">帖子类型：{{blog.blogLabel}}</p>
+            <p class="card-info">发帖人：{{blog.blogPosterName}}</p>
+            <p class="card-info">帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
+            <p class="card-info">帖子喜爱人数：{{blog.blogLikeCnt}}</p>
+          </div>
         </router-link>
       </el-card>
     </div>
@@ -90,6 +94,62 @@ export default {
   data() {
     return {
       lists: [{
+        blogId: 999,
+        blogLabel: 'xxx',
+        blogTitle: '一个blog',
+        blogPicture: '../../../static/images/blogImage.png',
+        blogPosterName: '用户名',
+        blogFavoriterCnt: 0,
+        blogLikeCnt: 0,
+      },{
+        blogId: 999,
+        blogLabel: 'xxx',
+        blogTitle: '一个blog',
+        blogPicture: '../../../static/images/blogImage.png',
+        blogPosterName: '用户名',
+        blogFavoriterCnt: 0,
+        blogLikeCnt: 0,
+      },{
+        blogId: 999,
+        blogLabel: 'xxx',
+        blogTitle: '一个blog',
+        blogPicture: '../../../static/images/blogImage.png',
+        blogPosterName: '用户名',
+        blogFavoriterCnt: 0,
+        blogLikeCnt: 0,
+      },{
+        blogId: 999,
+        blogLabel: 'xxx',
+        blogTitle: '一个blog',
+        blogPicture: '../../../static/images/blogImage.png',
+        blogPosterName: '用户名',
+        blogFavoriterCnt: 0,
+        blogLikeCnt: 0,
+      },{
+        blogId: 999,
+        blogLabel: 'xxx',
+        blogTitle: '一个blog',
+        blogPicture: '../../../static/images/blogImage.png',
+        blogPosterName: '用户名',
+        blogFavoriterCnt: 0,
+        blogLikeCnt: 0,
+      },{
+        blogId: 999,
+        blogLabel: 'xxx',
+        blogTitle: '一个blog',
+        blogPicture: '../../../static/images/blogImage.png',
+        blogPosterName: '用户名',
+        blogFavoriterCnt: 0,
+        blogLikeCnt: 0,
+      },{
+        blogId: 999,
+        blogLabel: 'xxx',
+        blogTitle: '一个blog',
+        blogPicture: '../../../static/images/blogImage.png',
+        blogPosterName: '用户名',
+        blogFavoriterCnt: 0,
+        blogLikeCnt: 0,
+      },{
         blogId: 999,
         blogLabel: 'xxx',
         blogTitle: '一个blog',
@@ -176,7 +236,9 @@ export default {
 </script>
 
 <style scoped>
-  .vpage {
+@import "../../../static/css/visitPage.css";
+
+.vpage {
     margin-top: 10vh;
   }
 </style>

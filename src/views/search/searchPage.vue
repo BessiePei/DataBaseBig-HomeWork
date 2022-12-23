@@ -203,7 +203,7 @@ export default {
   },
   created() {
     this.content = this.$route.params.content;
-    searchContent(this.content).then((response) => {
+    searchContent({search: this.content}).then((response) => {
           //console.log(response.data);
           this.result = response.data;
           console.log("searchResult: " + JSON.stringify(this.result));

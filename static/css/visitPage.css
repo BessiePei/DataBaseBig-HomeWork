@@ -1,0 +1,106 @@
+.title-line {
+  display: flex;
+  flex-direction: row;
+}
+
+.titleh {
+  font-size: 2rem;
+  color: #FF8D1A;
+  font-weight: bolder;
+  text-align: left;
+  margin: 9px 20px;
+
+}
+
+.btn {
+  background-color: var(--orange);
+	background-image: linear-gradient(90deg, var(--orange) 0%, var(--lightorange) 74%);
+	border-radius: 20px;
+	border: 1px solid var(--orange);
+	color: var(--white);
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: bold;
+	letter-spacing: 0.1rem;
+	padding: 0.5rem 3rem;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+  margin: 12px;
+}
+
+.carousel-inner>.item>img {
+            height: 400px;
+        }
+
+        .card-columns{
+            column-count: 4;
+            column-gap: 10px;
+            counter-reset: count;
+            width: 960px;
+            margin: 10px auto;
+        }
+
+        .card-columns>.card-pin{
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .card-img{
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        .overlay {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          width: 100%;
+          opacity: 0;
+          -webkit-transition: .2s ease;
+          transition: .2s ease;
+          background-color: #008CBA; }
+
+        .card {
+          border: 0; }
+
+        .card-pin:hover .overlay {
+          opacity: .5;
+          border: 5px solid #f3f3f3;
+          -webkit-transition: ease .2s;
+          transition: ease .2s;
+          background-color: #000000;
+          cursor: zoom-in; }
+
+        .more {
+          color: white;
+          font-size: 14px;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          text-transform: uppercase;
+          -webkit-transform: translate(-20%, -20%);
+                  transform: translate(-20%, -20%);
+          -ms-transform: translate(-50%, -50%); }
+
+        .card-pin:hover .card-title {
+          color: #ffffff;
+          margin-top: 10px;
+          text-align: center;
+          font-size: 1.2em;
+        }
+
+        .card-pin:hover .card-info {
+          color: #ffffff;
+          margin-top: 10px;
+          text-align: center;
+          font-size: 0.7em;
+        }
+
+        .card-pin:hover .more a {
+          text-decoration: none;
+          color: #ffffff; }
+
