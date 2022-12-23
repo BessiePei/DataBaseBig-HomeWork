@@ -131,6 +131,7 @@ import FavoriteButton from "../app/favoriteButton";
 import slider from "./../index/slider";
 import hotDishes from './../index/hotDishes'
 import {postActivity, postDish} from "../../api/merchants";
+import {mapGetters} from "vuex";
 
 export default {
   name: "merchantPage",
@@ -269,6 +270,12 @@ export default {
       this.isMerchant = this.$store.state.userinfo.isMerchant;
     }
     this.getData();
+  },
+  computed: {
+    /* ES6 使用辅助函数mapGetters，将组件中的方法映射为score.getters调用 */
+    ...mapGetters({
+      userinfo: "userinfo",
+    })
   }
 }
 </script>

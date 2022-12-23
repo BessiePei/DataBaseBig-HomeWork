@@ -37,7 +37,7 @@
               <button class="router-btn btn" >用户{{ userinfo.username }}</button>
             </router-link>
           </div>
-          <button @click="logout">退出</button>
+          <button @click="logout" class="btn">退出</button>
         </div>
         <div class="notLogin" v-else>
           <router-link :to="{path: '/reg'}"><button class="router-btn btn">登录/注册</button></router-link>

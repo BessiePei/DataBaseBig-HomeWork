@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const state = {
   count: 10,
   userinfo: localStorage["userinfo"]?
-    JSON.parse(localStorage["userinfo"]):[],
+    JSON.parse(localStorage["userinfo"]):null,
 }
 
 /* 同步处理 */

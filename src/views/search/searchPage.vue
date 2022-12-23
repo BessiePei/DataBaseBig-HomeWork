@@ -207,13 +207,13 @@ export default {
           //console.log(response.data);
           this.result = response.data;
           console.log("searchResult: " + JSON.stringify(this.result));
+          console.log(this.result);
+          this.ftmp = this.result;
+          this.getShowData();
         })
         .catch(function (error) {
           console.log(error);
         });
-      console.log(this.result);
-      this.ftmp = this.result;
-      this.getShowData();
   },
   updated() {
     this.content = this.$route.params.content;

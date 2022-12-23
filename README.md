@@ -69,6 +69,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - [ ] 菜品主页
 - [ ] 帖子主页
 - [ ] 商家主页
-- [ ] 逛逛
+- [x] 逛逛
 - [x] 搜索结果界面：实现分页/筛选/排序
 - [ ] 个人主页
+
+商家发表 userinfo

@@ -12,7 +12,7 @@
         <router-link :to="{path: '/profile'}">
           <button class="btn" v-show="!isMerchant">个人主页</button>
         </router-link>
-        <router-link :to="{name: 'merchantPage', params: {id: userinfo.merchantId}}">
+        <router-link :to="{name: 'merchantPage', params: {id: userinfo.id}}">
           <button class="btn" v-show="isMerchant">商家主页</button>
         </router-link>
       </div>
