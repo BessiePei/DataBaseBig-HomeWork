@@ -31,7 +31,7 @@
               <em>{{err_username2}}</em>
             </li>
             <input type="password" placeholder="密码" class="input" v-model="password2" required/>
-            <a href="#" class="link">忘记密码？</a>
+            <!--<a href="#" class="link">忘记密码？</a>-->
             <li class="error_box" id="password2_notice">
               <em>{{err_password2}}</em>
             </li>
