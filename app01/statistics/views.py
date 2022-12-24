@@ -30,6 +30,25 @@ from app01.statistics.serializer import ClassifyFavoriteDishesSerializer
 cursor = connection.cursor()
 
 
+def beforeDeleteActivity():
+    sql = 'CREATE TRIGGER beforeDeleteActivity before delete ' \
+          'ON db_hw.backend_activity FOR EACH ROW BEGIN ' \
+          'delete from db_hw.backend_user where backend_user.user_ab_id=OLD.user_ab_id;' \
+          'END'
+
+    cursor.execute(sql)
+
+
+def afterUserFavoriteBlog():
+    sql = 'CREATE TRIGGER afterUserFavoriteBlog after update ' \
+          'ON db_hw.backend_user FOR EACH ROW begin ' \
+          'UPDATE db_hw.backend_blog ' \
+          'set blogFavoriterCnt=blogFavoriterCnt+1 ' \
+          'where user_ab_id=NEW.user_ab_id;' \
+          'end'
+    cursor.execute(sql)
+
+
 class ClassifyDishesViewSet(ViewSet):
     def get_classified(self, request):
         sql = 'SELECT merchantName, count(*) from db_hw.backend_user, db_hw.backend_user_userfavoritedishes, db_hw.backend_dish, db_hw.backend_merchant ' \
