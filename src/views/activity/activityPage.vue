@@ -2,7 +2,7 @@
   <div class="vpage">
     <myheader></myheader>
     <h1>活动界面</h1>
-    <img :src="$store.getters.imgUrl + activity.activityHeadPhoto" alt="activity-picture"/>
+    <img :src="activity.activityHeadPhoto" alt="activity-picture"/>
     <p>活动名称：{{activity.activityName}}</p>
     <p>活动简介：{{activity.activityBrief}}</p>
     <p>活动时间：{{activity.activityBegin}}~{{activity.activityEnd}}</p>

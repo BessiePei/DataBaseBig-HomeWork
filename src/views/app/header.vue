@@ -62,8 +62,9 @@ export default {
     logout() {
       console.log(this.userinfo);
       console.log("退出中。。。");
+      this.$cookies.set("sessionid", "xxx");
       this.$cookies.isKey("sessionid");
-      this.$cookies.keys("sessionid");
+      this.$cookies.remove("sessionid")
       this.$store.dispatch("delUser");
       this.$router.push("/"); //跳转到首页
     },

@@ -62,10 +62,10 @@
       </el-tab-pane>
       <el-tab-pane label="修改个人信息" name="myInfo">
         修改个人信息
-        <p>用户名：</p>
-        <input v-model="info.userName" required/>
+        <p>昵称：</p>
+        <input v-model="info.username" required/>
         <p>邮箱：</p>
-        <input type="email" v-model="info.userEmail" required/>
+        <input type="email" v-model="info.email" required/>
         <p>个性签名；</p>
         <input v-model="info.userSignature" type="text"/>
         <p>用户头像：</p>
@@ -148,9 +148,9 @@ export default {
       }],
       info: {
         userId: 0,
-        userName: 'HangFood',
+        username: 'HangFood',
         userPassword: '',
-        userEmail: '',
+        email: '',
         userSignature: 'I love buaa food!',
         userSex: 1,
         userGrade: '大一',

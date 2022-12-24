@@ -19,8 +19,8 @@ const mutations = {
   },
   delUser(state) {
     console.log(" start delUser");
-    state.userinfo = null;
     localStorage.clear(); // 清除本地缓存
+    state.userinfo = null;
     // 清除全部cookie
       var cookies = document.cookie.split(";");
       for (var i = 0; i < cookies.length; i++) {
@@ -42,6 +42,7 @@ const mutations = {
             domain;
         }
       }
+      
   },
 }
 

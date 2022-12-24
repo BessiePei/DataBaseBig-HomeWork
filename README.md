@@ -64,9 +64,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - [x] mainPage=slider+hotDishes+merchantList+userShow已完成
 - [x] reg=login/signUp
 - [x] openShopPage
-- [ ] 评论remark
+- [x] 评论remark
 - [ ] 活动主页
-- [ ] 菜品主页
+- [x] 菜品主页
 - [ ] 帖子主页
 - [ ] 商家主页
 - [x] 逛逛
@@ -80,3 +80,6 @@ Set-Cookie: sessionId
 response.headers
 
 Document.cookie=response.headers.
+
+[使用vue-cookies操作cookie - 简书 (jianshu.com)](https://www.jianshu.com/p/60c13168cc8f)
+

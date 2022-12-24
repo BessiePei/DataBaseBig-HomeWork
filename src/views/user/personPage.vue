@@ -69,7 +69,7 @@ option = {
 */
          option = {
   title: {
-    text: '圆环图的例子',
+    text: '收藏菜品分类统计',
     left: 'center',
     top: 'center'
   },
