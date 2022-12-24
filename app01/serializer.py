@@ -15,11 +15,19 @@ class VisitorSerializer(serializers.ModelSerializer):
     pass
 
 
+class UserModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = ['username', 'email']
+
+
 class UserUpdateSerializer(serializers.ModelSerializer):
     # username = serializers.CharField(read_only=True, error_messages={
     #     "required": "请输入用户名",
     #     "blank": "用户名不能为空"
     # })
+    # todo
+    user_ab = UserModelSerializer(required=False)
 
     class Meta:
         model = MyUser
@@ -29,16 +37,24 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.ModelSerializer):
     isMerchant = serializers.SerializerMethodField()
 
-    # id = serializers.SerializerMethodField()
+    id = serializers.SerializerMethodField()
     # username = serializers.SerializerMethodField()
 
     class Meta:
         model = UserModel
         fields = ['id', 'username', 'isMerchant']
 
-    def get_isMerchant(self, instance):
+    def get_id(self, instance):
+        info = MyUser.objects.filter(user_ab_id=instance.id)
+        if info.exists():
+            return info[0].id
+        else:
+            return Merchant.objects.get(user_ab_id=instance.id).merchantId
 
-        if MyUser.objects.filter(user_ab_id=instance.id) is None:
+    def get_isMerchant(self, instance):
+        info = MyUser.objects.filter(user_ab_id=instance.id)
+
+        if info.exists():
             return False
         return True
 

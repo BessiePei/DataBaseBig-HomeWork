@@ -9,7 +9,7 @@ router = DefaultRouter()
 # router.register('slider', DishesSlideViewSet)
 
 urlpatterns = [
-    path("test/", ClassifyDishesViewSet.as_view({
+    path("chart/", ClassifyDishesViewSet.as_view({
         "get": "get_classified",  #
     })),
 ]

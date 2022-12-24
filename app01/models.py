@@ -72,7 +72,7 @@ class Merchant(models.Model):
     merchantId = models.AutoField(primary_key=True)
     user_ab = models.OneToOneField(UserModel, on_delete=models.CASCADE, verbose_name="用户")
     isMerchant = models.BooleanField(verbose_name='是否是商家',
-                                     choices=[(True, '是'), (False, '否')],default=False)
+                                     choices=[(True, '是'), (False, '否')], default=False)
     merchantName = models.CharField(max_length=30, verbose_name='窗口名', unique=True)
     merchantPassword = models.CharField(max_length=25, verbose_name='窗口登录密码')
     merchantPortrait = models.ImageField(verbose_name='窗口头像', upload_to=user_directory_path)  # 不能为空
@@ -103,8 +103,8 @@ class Dish(models.Model):
     user_ab = models.ForeignKey(UserModel, verbose_name='销售窗口', on_delete=models.CASCADE)  # dishSeller
     dishName = models.CharField(max_length=30, verbose_name='菜品名')
     dishPrice = models.FloatField(verbose_name='菜品价格')
-    dishPicture = models.ImageField(max_length=25, verbose_name='菜品头像',
-                                    null=True, default='default.jpg', upload_to=user_directory_path)
+    dishPicture = models.ImageField(verbose_name='菜品头像', null=True, default='default.jpg',
+                                    upload_to=user_directory_path)
     dishStars = models.FloatField(verbose_name='菜品评分', null=True)
     dishRaw = models.CharField(verbose_name='菜品原料', max_length=50,
                                null=True, default='暂未提供原料信息')
@@ -125,6 +125,20 @@ class Dish(models.Model):
         db_table = 'backend_dish'
 
 
+class BlogLabel(models.Model):
+    blogLabelId = models.AutoField(primary_key=True)
+    blogLabelContent = models.CharField(max_length=30, verbose_name='标签名称', unique=True)
+
+    # blogs = models.ManyToManyField(Blog)
+
+    def __str__(self):
+        return self.blogLabelContent
+
+    # 自定义表名
+    class Meta:
+        db_table = 'backend_blog_Label'
+
+
 class Blog(models.Model):
     blogId = models.AutoField(primary_key=True)
     user_ab = models.ForeignKey(UserModel, verbose_name="发布者", related_name="post_blog",
@@ -133,11 +147,13 @@ class Blog(models.Model):
                                       choices=[(True, '是'), (False, '否')],
                                       null=True)
     blogTitle = models.CharField(max_length=45, verbose_name='帖子标题')
-    blogContent = models.FileField(verbose_name='帖子内容存储路径', upload_to='blogs/contents')
+    blogContent = models.CharField(max_length=3000, verbose_name='帖子内容', default="NO CONTENT!")
+    blogPicture = models.ImageField(verbose_name='活动头图', upload_to=user_directory_path,
+                                    null=True, default='default.jpg')
     blogDeliverTime = models.DateTimeField(verbose_name='帖子发布时间', auto_now_add=True)
     blogFavoriterCnt = models.IntegerField(verbose_name='帖子的收藏人数', null=True, default=0)
     blogLikeCnt = models.IntegerField(verbose_name='帖子的喜欢人数', null=True, default=0)
-
+    blogLabel = models.CharField(max_length=30, verbose_name="标签", null=True)
     # 多对多关系
     blogsFavoritedUsers = models.ManyToManyField(UserModel)
     blogsActivitys = models.ManyToManyField(Activity)
@@ -168,8 +184,8 @@ class MyUser(models.Model):
     userSex = models.IntegerField(verbose_name='用户性别', choices=sex_choice,
                                   null=True, default=1)  # choices关键字固定的
     userGrade = models.CharField(max_length=25, verbose_name='用户年级', blank=True)
-    userPortrait = models.ImageField(max_length=25, verbose_name='用户头像',
-                                     null=True, default='default.jpg', upload_to=user_directory_path)
+    userPortrait = models.ImageField(verbose_name='用户头像', null=True, default='default.jpg',
+                                     upload_to=user_directory_path)
     userPrefer = models.CharField(max_length=25, verbose_name='用户的口味偏好',
                                   blank=True, default='')
 
@@ -194,61 +210,12 @@ class MyUser(models.Model):
 
 class BlogPicture(models.Model):
     blogPictureId = models.AutoField(primary_key=True)
-    blogPicture = models.ImageField(max_length=25, verbose_name='帖子照片',
-                                    null=True, default='default.jpg', upload_to=r'blogs/imgs')
+    blogPicture = models.ImageField(verbose_name='帖子照片', null=True, default='default.jpg', upload_to=r'blogs/imgs')
     blogId = models.ManyToManyField(Blog)
 
     # 自定义表名
     class Meta:
         db_table = 'backend_blog_picture'
-
-
-class BlogLabel(models.Model):
-    blogLabelId = models.AutoField(primary_key=True)
-    blogLabelContent = models.CharField(max_length=30, verbose_name='标签名称', unique=True)
-    blogs = models.ManyToManyField(Blog)
-
-    def __str__(self):
-        return self.blogLabelContent
-
-    # 自定义表名
-    class Meta:
-        db_table = 'backend_blog_Label'
-
-
-#
-# class MerchantComment(models.Model):
-#     commentId = models.AutoField(primary_key=True)
-#     commentContent = models.CharField(max_length=300, verbose_name='评论内容')
-#     commentDeliverTime = models.DateTimeField(verbose_name='发布时间')
-#     commentSort = models.IntegerField(verbose_name='评论性质',
-#                                       choices=((0, '发布'), (1, '收到')))
-#
-#     merchant = models.ForeignKey(Merchant, related_name="merchant_comment", on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return {'评论id': self.commentId, '评论内容': self.commentContent}
-#
-#     # 自定义表名
-#     class Meta:
-#         db_table = 'backend_merchant_comment'
-#
-#
-# class UserComment(models.Model):
-#     commentId = models.AutoField(primary_key=True)
-#     commentContent = models.CharField(max_length=300, verbose_name='评论内容')
-#     commentDeliverTime = models.DateTimeField(verbose_name='发布时间')
-#     commentSort = models.IntegerField(verbose_name='评论性质',
-#                                       choices=((0, '发布'), (1, '收到')))
-#
-#     user = models.ForeignKey(MyUser, related_name="user_comment", on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return {'评论id': self.commentId, '评论内容': self.commentContent}
-#
-#     # 自定义表名
-#     class Meta:
-#         db_table = 'backend_user_comment'
 
 
 class ActivityComment(models.Model):

@@ -27,7 +27,6 @@ urlpatterns = [
     path('merchant/1/activity/<int:pk>/', MerchantViewSet.as_view({
         "delete": "deleteMerchantActivity",  # function deleteMerchantDish()
     })),
-    # todo check modify url
     path('merchant/dishes/', MerchantViewSet.as_view({
         "post": "postDish",  # function postDish()
     })),

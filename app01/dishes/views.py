@@ -33,8 +33,7 @@ class DishModelViewSet(viewsets.ModelViewSet):
 class DishViewSet(ViewSet):
 
     def get_all_items(self, request):
-        # todo hot dishes
-        items = Dish.objects.all()
+        items = Dish.objects.all().order_by('dishFollowerCnt')
         bs = DishesSerializer(instance=items, many=True)
         return Response(bs.data)
 
@@ -91,6 +90,16 @@ class DishViewSet(ViewSet):
         Dish.objects.get(dishId=pk).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# class DishesSlideViewSet(viewsets.ModelViewSet):
-#     queryset = DishesSlide.objects.all().order_by('sort')
-#     serializer_class = DishesSlideSerializer
+
+class SearchView(ViewSet):
+    def searchDishes(self, request):
+        print(request.query_params)
+        content = request.query_params["search"]
+        items = Dish.objects.all()
+        filtRes = items.filter(dishName__icontains=content) | \
+                  items.filter(dishBrief__icontains=content) | \
+                  items.filter(dishRaw__icontains=content) | \
+                  items.filter(dishTaste__icontains=content)
+        ser = DishesSerializer(filtRes, many=True)
+        print(ser.data)
+        return Response(data=ser.data)

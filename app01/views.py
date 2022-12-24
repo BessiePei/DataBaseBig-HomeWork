@@ -47,6 +47,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class UserView(ViewSet):
     permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsNotAuthenticated,)
 
     def get_item(self, request):
         print(request.user.id)
@@ -56,14 +57,16 @@ class UserView(ViewSet):
 
     # 修改密码的端口另写，接口也改一下
     def edit_item(self, request):
-        print(request.user)
+        print(request.data)
         instance = MyUser.objects.get(user_ab=request.user)
         # 用户名 按照 userNickName 传
         bs = UserUpdateSerializer(instance=instance, data=request.data, partial=True)
         if bs.is_valid():
             bs.save()
+            print(bs.data)
             return Response(bs.data, status.HTTP_200_OK)
         else:
+            print(bs.errors)
             return Response(bs.errors, status.HTTP_400_BAD_REQUEST)
 
     def changePassword(self, request):
@@ -124,8 +127,9 @@ class UserView(ViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def deleteUserLoveBlog(self, request, pk):
-        user = MyUser.objects.get(user_ab=request.user)
-        info = user.userFavoriteBlogs.remove(pk)
+        # user = MyUser.objects.get(user_ab=request.user)
+        # info = user.userFavoriteBlogs.remove(pk)
+        tgt = Blog.objects.get(blogId=pk).delete()
         # todo 返回值？
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -173,9 +177,9 @@ class MerchantRegisterView(APIView):
                 #                                        merchantPhone=request.data["merchantPhone"],
                 #                                        merchantPortrait=request.data["merchantPortrait"])
 
-                user = authenticate(username=request.data.get('merchantName'),
-                                    password=request.data.get('merchantPassword'))
-                login(request, user)
+                # user = authenticate(username=request.data.get('merchantName'),
+                #                     password=request.data.get('merchantPassword'))
+                # login(request, user)
 
                 return Response(
                     data=merchantSerializer.data,

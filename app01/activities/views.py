@@ -12,6 +12,7 @@ from rest_framework.viewsets import ViewSet
 
 from app01.activities.serializer import ActivitySerializer, ActivitySlideSerializer
 from app01.comments.serializer import ActivityCommentSerializer, MerchantActivityCommentSerializer
+from app01.merchants.serializer import MerchantSerializer
 from app01.models import Activity, ActivitySlide, UserModel, MyUser, Merchant, ActivityComment
 
 from rest_framework import viewsets, status
@@ -23,20 +24,25 @@ from app01.serializer import UserSerializer
 
 class ActivityModelViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
-    serializer_class = ActivitySerializer
+    serializer_class = ActivitySlideSerializer
 
     @action(methods=['post'], detail=True, url_path='join')
     def userJoinInActivity(self, request, pk):
+
+        user = MyUser.objects.filter(user_ab=request.user)
+        if user.exists():
+            user_obj = user[0]
+            user_obj.userActivities.add(pk)
+            user_obj.save()
+            ser = UserSerializer(user_obj)
+        else:
+            merchant_obj = Merchant.objects.get(user_ab_id=request.user.id)
+            merchant_obj.merchantActivities.add(pk)
+            merchant_obj.save()
+            ser = MerchantSerializer(merchant_obj)
         instance = Activity.objects.get(activityId=pk)
         instance.activityPersonCnt += 1
         instance.save()
-
-        user_obj = get_object_or_404(MyUser, user_ab=request.user)
-        print(user_obj.user_ab)
-        user_obj.userActivities.add(pk)
-        user_obj.save()
-
-        ser = UserSerializer(user_obj)
         return Response(data=ser.data)
 
     @action(methods=['get'], detail=True, url_path='remark')
@@ -62,20 +68,12 @@ class ActivityModelViewSet(viewsets.ModelViewSet):
             return Response(item.errors)
 
 
-# get_all_items
-# def list(self, request, *args, **kwargs):
-
-# add_item
-# def create(self, request, *args, **kwargs):
-
-# get_one_item
-# def retrieve(self, request, *args, **kwargs):
-
-# edit_item
-# def update(self, request, *args, **kwargs):
-
-# delete
-# def destroy(self, request, *args, **kwargs):
+class ActivitySlidesViewSet(ViewSet):
+    def getActivities(self, request):
+        items = Activity.objects.all()
+        ser = ActivitySlideSerializer(items, many=True)
+        print(ser.data)
+        return Response(data=ser.data)
 
 
 class ActivitySlideViewSet(viewsets.ModelViewSet):

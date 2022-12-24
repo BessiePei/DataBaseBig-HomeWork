@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
-from app01.dishes.views import DishViewSet
+from app01.dishes.views import DishViewSet, SearchView
 
 router = DefaultRouter()
 # router.register('slider', DishesSlideViewSet)
@@ -23,5 +23,8 @@ urlpatterns = [
     # })),
     path("dish/<int:pk>/favorite/", DishViewSet.as_view({
         "post": "favoriteDish",  # function getDishByID(id)
+    })),
+    path("dish/", SearchView.as_view({
+        "get": "searchDishes",
     })),
 ]

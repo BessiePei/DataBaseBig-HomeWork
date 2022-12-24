@@ -20,9 +20,6 @@ from app01.models import Activity, ActivitySlide, UserModel, MyUser, BlogComment
 
 from rest_framework import viewsets, status
 
-from app01.mypage import MyPage
-from app01.permissions import IsNotAuthenticated
-
 
 class ActivityModelViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
@@ -36,11 +33,11 @@ class ActivityModelViewSet(viewsets.ModelViewSet):
 
         user_obj = get_object_or_404(MyUser, user_ab=request.user)
         print(user_obj)
-        user_activities = list(user_obj.userActivityId.all())
+        user_activities = list(user_obj.userActivities.all())
         print(user_activities)
         user_activities.append(instance)
-        user_obj.userActivityId.clear()
-        user_obj.userActivityId.add(*user_activities)
+        user_obj.userActivities.clear()
+        user_obj.userActivities.add(*user_activities)
         user_obj.save()
         return Response(data={"detail": "参加成功"})
 
@@ -48,27 +45,8 @@ class ActivityModelViewSet(viewsets.ModelViewSet):
     def getActivityComments(self, request, pk):
         instance = Activity.objects.filter(activityId=pk).first()
 
-    # get_all_items
-    # def list(self, request, *args, **kwargs):
-
-    # add_item
-    # def create(self, request, *args, **kwargs):
-
-    # get_one_item
-    # def retrieve(self, request, *args, **kwargs):
-
-    # edit_item
-    # def update(self, request, *args, **kwargs):
-
-    # delete
-    # def destroy(self, request, *args, **kwargs):
-
-
-
 
 
 class BlogCommentModelViewSet(viewsets.ModelViewSet):
     queryset = BlogComment.objects.all()
     serializer_class = BlogCommentSerializer
-
-

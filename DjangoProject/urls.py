@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 # from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework.authtoken.views import obtain_auth_token
+from django.conf.urls.static import static
+from . import settings
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -25,4 +27,4 @@ urlpatterns = [
     path(r'', TemplateView.as_view(template_name="index.html")),
     #  token认证
     path('api/token_auth/', obtain_auth_token)
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

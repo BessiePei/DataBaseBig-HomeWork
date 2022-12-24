@@ -48,6 +48,7 @@ class BlogViewSet(ViewSet):
         print(request, pk)
         item = Blog.objects.get(blogId=pk)
         bs = BlogSerializer(instance=item)
+        print(bs.data)
         return Response(bs.data)
 
     def getBlogRemark(self, request, pk):

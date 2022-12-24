@@ -16,7 +16,7 @@ from rest_framework.viewsets import ViewSet
 
 from rest_framework import viewsets, status
 
-from app01.activities.serializer import ActivitySerializer
+from app01.activities.serializer import ActivitySerializer, ActivitySlideSerializer
 from app01.dishes.serializer import DishesSerializer
 from app01.merchants.serializer import MerchantSerializer, MerchantActivitiesSerializer
 from app01.models import Merchant, Canteen, Activity, Dish
@@ -48,7 +48,7 @@ class MerchantViewSet(ViewSet):
         merchant = Merchant.objects.get(merchantId=pk)
         activities = merchant.merchantActivities.all()
         # print(activities)
-        ser = MerchantActivitiesSerializer(merchant)
+        ser = ActivitySlideSerializer(activities, many=True)
         # print(activities)
         # activities = Activity.objects.filter(merchant__merchantId=pk)
         # print(activities)
@@ -73,8 +73,6 @@ class MerchantViewSet(ViewSet):
             return Response(data={"detail:": "wrong delete"})
 
     def deleteMerchantDish(self, request, pk):
-        # todo 返回信息？
-        # check 外联
         dish = Dish.objects.get(dishId=pk)
         print(dish.user_ab, request.user)
         if dish.user_ab == request.user:
@@ -107,79 +105,10 @@ class MerchantViewSet(ViewSet):
         activity.save()
         merchant = Merchant.objects.get(user_ab=request.user)
         merchant.merchantActivities.add(activity.activityId)
-        item = ActivitySerializer(activity, data=request.data,partial=True)
+        item = ActivitySerializer(activity, data=request.data, partial=True)
         if item.is_valid():
             item.save()
             return Response(item.data)
         else:
             print(item.errors)
             return Response(item.errors)
-
-    # def get_all_items(self, request):
-    #
-    #     books = Merchant.objects.all()
-    #     bs = MerchantSerializer(instance=books, many=True)
-    #     return Response(bs.data)
-    #
-    # def add_item(self, request):
-    #     bs = MerchantSerializer(data=request.data)
-    #     if bs.is_valid():
-    #         bs.save()
-    #         return Response(bs.data)
-    #     else:
-    #         return Response(bs.errors)
-    #
-    # def get_one_item(self, request, pk):
-    #     print(request, pk)
-    #     book = Merchant.objects.get(merchantId=pk)
-    #     bs = MerchantSerializer(instance=book)
-    #     return Response(bs.data)
-    #
-    # def edit_item(self, request, pk):
-    #     instance = Merchant.objects.get(merchantId=pk)
-    #     bs = MerchantSerializer(instance=instance, data=request.data)
-    #     if bs.is_valid():
-    #         bs.save()
-    #         return Response(bs.data)
-    #     else:
-    #         return Response(bs.errors)
-    #
-    # def delete(self, request, pk):
-    #     Merchant.objects.get(merchantId=pk).delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class CanteenViewSet(ViewSet):
-
-    def get_all_items(self, request):
-
-        items = Canteen.objects.all()
-        bs = CanteenSerializer(instance=items, many=True)
-        return Response(bs.data)
-
-    def add_item(self, request):
-        bs = CanteenSerializer(data=request.data)
-        if bs.is_valid():
-            bs.save()
-            return Response(bs.data)
-        else:
-            return Response(bs.errors)
-
-    def get_one_item(self, request, pk):
-        print(request, pk)
-        book = Canteen.objects.get(canteenId=pk)
-        bs = CanteenSerializer(instance=book)
-        return Response(bs.data)
-
-    def edit_item(self, request, pk):
-        instance = Canteen.objects.get(canteenId=pk)
-        bs = CanteenSerializer(instance=instance, data=request.data)
-        if bs.is_valid():
-            bs.save()
-            return Response(bs.data)
-        else:
-            return Response(bs.errors)
-
-    def delete(self, request, pk):
-        Canteen.objects.get(canteenId=pk).delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -30,100 +30,34 @@ from app01.statistics.serializer import ClassifyFavoriteDishesSerializer
 cursor = connection.cursor()
 
 
-class DishModelViewSet(viewsets.ModelViewSet):
-    queryset = Dish.objects.all()
-    serializer_class = DishesSerializer
-
-
 class ClassifyDishesViewSet(ViewSet):
     def get_classified(self, request):
-        sql = "SELECT merchantName, count(*) from db_hw.backend_user, db_hw.backend_user_userfavoritedishes, db_hw.backend_dish, db_hw.backend_merchant " \
-              "where myuser_id=backend_user.id and backend_user.user_ab_id=%s and backend_dish.user_ab_id=backend_merchant.user_ab_id " \
-              "group by backend_dish.user_ab_id"
-        print(type(request.user.id))
+        sql = 'SELECT merchantName, count(*) from db_hw.backend_user, db_hw.backend_user_userfavoritedishes, db_hw.backend_dish, db_hw.backend_merchant ' \
+              'where backend_user_userfavoritedishes.myuser_id=backend_user.id and ' \
+              'backend_user_userfavoritedishes.dish_id=backend_dish.dishId and ' \
+              'backend_user.user_ab_id=%s and ' \
+              'backend_dish.user_ab_id=backend_merchant.user_ab_id ' \
+              'group by backend_dish.user_ab_id'
+        print(request.user.id)
+        print(type(MyUser.objects.all()))
         cursor.execute(
             sql,
             [request.user.id]
         )
         items = cursor.fetchall()
+        print(items)
         liss = []
+        default = {"merchantName": "null", "dishesCnt": 0}
         single = {}
         for item in items:
-            single["merchantName"]= item[0]
-            single["dishesCnt"]= item[1]
+            single["value"] = item[1]
+            single["name"] = item[0]
+            data = ClassifyFavoriteDishesSerializer(data=single)
+            if data.is_valid():
+                data.save()
             liss.append(single)
             single = {}
+        if len(liss) == 0:
+            liss.append(default)
         print(liss)
-        ser = ClassifyFavoriteDishesSerializer(data=liss, many=True)
-        # print(ser.data)
-        if ser.is_valid():
-            ser.save()
-            return Response(data=ser.data)
-        else:
-            return Response(data=ser.errors)
-
-
-class DishViewSet(ViewSet):
-
-    def get_all_items(self, request):
-        # todo hot dishes
-        items = Dish.objects.all()
-        bs = DishesSerializer(instance=items, many=True)
-        return Response(bs.data)
-
-    # def add_item(self, request):
-    #     bs = DishesSerializer(data=request.data)
-    #     if bs.is_valid():
-    #         bs.save()
-    #         return Response(bs.data)
-    #     else:
-    #         return Response(bs.errors)
-
-    def get_one_item(self, request, pk):
-        print(request, pk)
-        item = Dish.objects.get(dishId=pk)
-        bs = DishesSerializer(instance=item)
-        return Response(bs.data)
-
-    def getDishRemark(self, request, pk):
-        items = DishComment.objects.filter(dish_id=pk)
-        ser = DishCommentSerializer(items, many=True)
-        return Response(ser.data)
-
-    def postDishRemark(self, request, pk):
-        dishComment = DishComment.objects.create(commenter=request.user, dish_id=pk)
-        item = DishCommentSerializer(instance=dishComment, data=request.data, partial=True)
-        if item.is_valid():
-            item.save()
-            return Response(item.data)
-        else:
-            print(item.errors)
-            return Response(item.errors)
-        pass
-
-    def favoriteDish(self, request, pk):
-        user = MyUser.objects.get(user_ab=request.user)
-        user.userFavoriteDishes.add(pk)
-        user.save()
-        ser = UserSerializer(user)
-        dish = Dish.objects.get(dishId=pk)
-        dish.dishFollowerCnt += 1
-        dish.save()
-        return Response(ser.data)
-
-    def edit_item(self, request, pk):
-        instance = Dish.objects.get(dishId=pk)
-        bs = DishesSerializer(instance=instance, data=request.data)
-        if bs.is_valid():
-            bs.save()
-            return Response(bs.data)
-        else:
-            return Response(bs.errors)
-
-    def delete(self, request, pk):
-        Dish.objects.get(dishId=pk).delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-# class DishesSlideViewSet(viewsets.ModelViewSet):
-#     queryset = DishesSlide.objects.all().order_by('sort')
-#     serializer_class = DishesSlideSerializer
+        return Response(data=liss)
