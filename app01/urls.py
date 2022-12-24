@@ -57,4 +57,5 @@ urlpatterns = [
     path("users/1/blogs/<int:pk>/", UserView.as_view({
         "delete": "deleteUserBlog",
     })),
+    path("users/1/logout/", LogoutView.as_view())
 ]

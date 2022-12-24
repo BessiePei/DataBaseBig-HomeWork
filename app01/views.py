@@ -244,6 +244,6 @@ class LoginView(APIView):
 
 
 class LogoutView(APIView):
-    def post(self, request):
+    def get(self, request):
         logout(request)
-        return Response({"detail": "登出成功"}, status.HTTP_200_OK)
+        return Response({"detail": "fine"})
