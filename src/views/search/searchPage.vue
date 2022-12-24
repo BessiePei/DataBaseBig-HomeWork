@@ -223,7 +223,19 @@ export default {
   watch: {
     $route: {
       handler: function(newl, oldl) {
-        this.getShowData();
+        this.content = this.$route.params.content;
+    console.log("watch" + this.content);
+    searchContent({search: this.content}).then((response) => {
+          //console.log(response.data);
+          this.result = response.data;
+          console.log("searchResult: " + JSON.stringify(this.result));
+          console.log(this.result);
+          this.ftmp = this.result;
+          this.getShowData();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       }
     }
 
