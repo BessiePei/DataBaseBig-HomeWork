@@ -42,7 +42,7 @@ const mutations = {
             domain;
         }
       }
-      
+      document.cookie = null;
   },
 }
 

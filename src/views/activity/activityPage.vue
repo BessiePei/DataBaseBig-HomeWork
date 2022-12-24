@@ -1,17 +1,20 @@
 <template>
   <div class="vpage">
     <myheader></myheader>
-    <h1>活动界面</h1>
+    <div class="info-card">
     <img :src="activity.activityHeadPhoto" alt="activity-picture"/>
+      <div class="card-content">
+      <h1 class="htitle">活动详情</h1>
     <p>活动名称：{{activity.activityName}}</p>
     <p>活动简介：{{activity.activityBrief}}</p>
     <p>活动时间：{{activity.activityBegin}}~{{activity.activityEnd}}</p>
-    <router-link :to="{name: 'canteenPage', params: {id: activity.activityOrganizerId}}">
-      <p>活动主办方：{{activity.activityOrganizerName}}</p>
-    </router-link>
+    <p>活动主办方：{{activity.activityOrganizerName}}</p>
     <p>活动内容： {{activity.activityContent}}</p>
     <p>活动参与人数： {{activity.activityPersonCnt}}</p>
-    <button @click="dialogVisible=true">参加活动</button>
+    <button @click="dialogVisible=true" class="btn">参加活动</button>
+      </div>
+    </div>
+    <p>活动评论</p>
     <remark :source="'activity'" :id="id"></remark>
     <myfooter></myfooter>
     <el-dialog
@@ -112,4 +115,38 @@ export default {
     margin-bottom: 36px;
   }
 
+  .info-card {
+    /* border: 1px solid black; */
+    width: 800px;
+    height: 500px;
+    border-radius: 20px;
+    background-color: blanchedalmond;
+    box-shadow: 1px 1px #8c939d;
+    margin: 20px auto;
+    position: relative;
+    top: 20px;
+    display: flex;
+    padding: 20px;
+  }
+
+  img {
+    max-width: 400px;
+  }
+
+  .card-content {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .htitle {
+    font-size: 1rem;
+    font-weight: lighter;
+     /* border: 1px solid black; */
+    background: cornsilk;
+    text-align: center;
+  }
 </style>

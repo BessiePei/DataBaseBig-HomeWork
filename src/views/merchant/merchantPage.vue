@@ -1,19 +1,20 @@
 <template>
   <div class="vpage">
     <myheader></myheader>
-    <h1>窗口主页</h1>
+    <div class="merchant-card">
     <img :src="$store.getters.imgUrl + info.merchantPortrait"/>
+      <div class="merchantInf">
     <p>商家名：{{info.merchantName}}</p>
     <p>商家电话： {{info.merchantPhone}}</p>
     <p>商家评分： {{info.merchantStars}}</p>
     <p>营业时间： {{info.merchantOpen}}~{{info.merchantClose}}</p>
     <p>商家地址： {{info.merchantAddr}}</p>
-    <button v-show="isMerchant" @click="dialogDishVisible=true">发布菜品</button>
-    <button v-show="isMerchant" @click="dialogActivityVisible=true">发布活动</button>
-    <h1>窗口活动</h1>
-    <slider :id="id"></slider>
-    <h1>窗口菜品</h1>
-    <hot-dishes :id="id"></hot-dishes>
+    <button class="btn" v-show="isMerchant" @click="dialogDishVisible=true">发布菜品</button>
+    <button class="btn" v-show="isMerchant" @click="dialogActivityVisible=true">发布活动</button>
+        </div>
+    </div>
+    <slider :id="id" class="slider-pos"></slider>
+    <hot-dishes :id="id" class="hotdishes-pos"></hot-dishes>
     <myfooter></myfooter>
     <!-- 发布活动弹窗 -->
     <el-dialog title="发布活动" :visible.sync="dialogActivityVisible" :before-close="handleClose" center>
@@ -283,5 +284,56 @@ export default {
 <style scoped>
   .vpage {
     margin-top: 10vh;
+  }
+
+  .merchant-card {
+    width: 800px;
+  height: 350px;
+  border-radius: 20px;
+  background-color: blanchedalmond;
+  box-shadow: 1px 1px #8c939d;
+  margin: 20px auto;
+  position: relative;
+  top: 20px;
+  display: flex;
+  padding: 20px;
+  }
+
+  img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .merchantInf {
+    height: 300px;
+  width: 400px;
+  margin-left: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  }
+
+  .btn {
+    background-color: var(--orange);
+	background-image: linear-gradient(90deg, var(--orange) 0%, var(--lightorange) 74%);
+	border-radius: 20px;
+	border: 1px solid var(--orange);
+	color: var(--white);
+	cursor: pointer;
+	font-size: 0.8rem;
+	font-weight: bold;
+	letter-spacing: 0.1rem;
+	padding: 0.9rem 4rem;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+  }
+
+  .slider-pos {
+    margin: auto;
+  }
+
+  .hotdishes-pos {
+    margin: auto;
   }
 </style>

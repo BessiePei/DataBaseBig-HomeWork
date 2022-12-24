@@ -1,7 +1,6 @@
 <template>
   <div class="vpage">
     <myheader></myheader>
-    <h1 class="title">个人主页</h1>
     <user-info-card></user-info-card>
     <div id="main" style="width: 400px; height: 400px"></div>
     <user-tools></user-tools>
@@ -67,7 +66,7 @@ option = {
   ]
 };
 */
-         option = {
+  myChart.setOption({
   title: {
     text: '收藏菜品分类统计',
     left: 'center',
@@ -87,24 +86,28 @@ option = {
       type: 'pie',
       data: [
         { value: 1, name: 'rose 1' },
-        { value: 2, name: 'rose 2' },
-        { value: 0, name: 'rose 3' },
-        { value: 3, name: 'rose 4' },
-        { value: 4, name: 'rose 5' },
-        { value: 0, name: 'rose 6' },
-        { value: 2, name: 'rose 7' },
-        { value: 5, name: 'rose 8' }
-      ],
+        { value: 2, name: '窗口xx' },
+        { value: 0, name: '窗口1' },
+        { value: 3, name: 'rose 4' }, ],
       radius: ['40%', '70%']
     }
   ]
-};
+});
         getChart().then((response) => {
-          option.data = response.data;
-          option && myChart.setOption(option);
+          console.log(response.data);
+          myChart.setOption({
+            series: [
+              {
+                type: 'pie',
+                data: response.data,
+                radius: ['40%', '70%']
+              }
+            ]
+          });
         }).catch (function(error){
           console.log(error);
         })
+
         window.onresize = myChart.resize();
       }
   },
@@ -121,6 +124,9 @@ option = {
   .vpage {
     margin-top: 10vh;
     margin-bottom: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .title {

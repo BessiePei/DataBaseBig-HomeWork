@@ -1,8 +1,9 @@
 <template>
   <div id="hot-dishes">
     <h1 class="title"> 热门菜品 </h1>
-    <div class="dishes">
-      <el-card :body-style="{ padding: '0px',width: '200px'}" shadow="hover" v-for="dish in lists" :key="dish.dishId">
+    <p v-if="lists.length===0">还未发布任何菜品</p>
+    <div class="dishes" v-else>
+      <el-card class="dish-card" :body-style="{ padding: '0px',width: '200px'}" shadow="hover" v-for="dish in lists" :key="dish.dishId">
         <router-link :to="{name: 'dishPage', params: {id: dish.dishId}}">
           <img :src="$store.getters.imgUrl + dish.dishPicture" alt="activity-picture"/>
           <span class="name">{{dish.dishName}}</span>
@@ -182,7 +183,7 @@ export default {
 
 <style scoped>
   #hot-dishes {
-    width: 60%;
+    width: 80%;
   }
 
   .title {
@@ -193,6 +194,10 @@ export default {
   .dishes {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .dish-card {
+    margin: 5px;
   }
 
   img {

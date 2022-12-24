@@ -50,7 +50,7 @@ export default {
 
 <style scoped>
   #userShow {
-    width: 30%;
+    width: 240px;
     max-width: 400px;
     background-color: whitesmoke;
     border: 2px solid var(--orange);

@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
     <h1 class="slider__title">进行中的活动</h1>
-    <div class="swiper">
+    <p v-if="lists.length===0">还未发布任何活动</p>
+    <div class="swiper" v-else>
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="activity in lists" :key="activity.activityId">
             <div class="activity-card">

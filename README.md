@@ -64,14 +64,14 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - [x] mainPage=slider+hotDishes+merchantList+userShow已完成
 - [x] reg=login/signUp
 - [x] openShopPage
-- [x] 评论remark
-- [ ] 活动主页
+- [x] 评论remark 时间引进day_time和min_time xx
+- [x] 活动主页
 - [x] 菜品主页
-- [ ] 帖子主页
-- [ ] 商家主页
+- [x] 帖子主页 deliverTime引进day_time和min_time
+- [x] 商家主页
 - [x] 逛逛
 - [x] 搜索结果界面：实现分页/筛选/排序
-- [ ] 个人主页
+- [x] 个人主页-图表数据显示问题（已修复）， 用户修改个人信息必须添加头像
 
 商家发表 userinfo
 
@@ -83,3 +83,11 @@ Document.cookie=response.headers.
 
 [使用vue-cookies操作cookie - 简书 (jianshu.com)](https://www.jianshu.com/p/60c13168cc8f)
 
+允许自动换行：
+
+```
+word-break: break-word;
+white-space: pre-line;
+```
+
+- [ ] 前端清除cookies问题

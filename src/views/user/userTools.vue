@@ -4,76 +4,120 @@
       <el-tab-pane label="我的菜品" name="myDish">
         我的菜品
         <p v-show="dishes.length === 0">你还未收藏任何菜品，快去收藏您喜欢的菜品吧！</p>
-        <el-card :body-style="{ padding: '0px',width: '200px'}" shadow="hover" v-for="dish in dishes" :key="dish.dishId">
+        <el-card :body-style="{ padding: '5px',width: '100%'}" shadow="hover" v-for="dish in dishes" :key="dish.dishId">
+          <div class="table-item-c">
           <router-link :to="{name: 'dishPage', params: {id: dish.dishId}}">
+            <div  class="table-item">
             <img :src="$store.getters.imgUrl + dish.dishPicture" alt="activity-picture"/>
-            <span class="name">{{dish.dishName}}</span>
-            <div class="price" >￥{{dish.dishPrice}}</div>
-            <div class="seller">{{dish.dishSeller}}</div>
-            <div class="mark"><i class="el-icon-s-marketing"/>{{dish.dishStars}}</div>
-            <div class="love"><i class="el-icon-star-off" />{{dish.dishFollowerCnt}}</div>
-          </router-link>
-          <el-button type="danger" icon="el-icon-delete" circle  @click="deleteDish(dish.dishId)"></el-button>
+            <span class="name word">{{dish.dishName}}</span>
+            <div class="price word" >￥{{dish.dishPrice}}</div>
+            <div class="seller word">{{dish.dishSeller}}</div>
+            <div class="mark word"><i class="el-icon-s-marketing"/>{{dish.dishStars}}</div>
+            <div class="love word"><i class="el-icon-star-off" />{{dish.dishFollowerCnt}}</div>
+            </div>
+            </router-link>
+          <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteDish(dish.dishId)"></el-button>
+          </div>
         </el-card>
       </el-tab-pane>
       <el-tab-pane label="我的活动" name="myActivity">
         我的活动
         <p v-show="activities.length === 0">你还未参加任何活动，快去参加您感兴趣的活动吧！</p>
-        <el-card shadow="hover" v-for="activity in activities" :key="activity.activityId">
+        <el-card :body-style="{ padding: '5px',width: '100%'}" shadow="hover" v-for="activity in activities" :key="activity.activityId">
+          <div class="table-item-c">
           <router-link :to="{name: 'activityPage', params: {id: activity.activityId}}">
+            <div class="table-item">
             <img :src="$store.getters.imgUrl + activity.activityHeadPhoto" alt="activity-picture"/>
             <p>活动名称：{{activity.activityName}}</p>
             <p>活动简介：{{activity.activityBrief}}</p>
             <p>活动时间：{{activity.activityBegin}}~{{activity.activityEnd}}</p>
             <p>活动主办方：{{activity.activityOrganizerName}}</p>
+            </div>
           </router-link>
-          <el-button type="danger" icon="el-icon-delete" circle  @click="deleteActivity(activity.activityId)"></el-button>
+          <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteActivity(activity.activityId)"></el-button>
+          </div>
         </el-card>
       </el-tab-pane>
       <el-tab-pane label="我发布的帖子" name="myBlog">
         我发布的帖子
         <p v-show="blogs.length === 0">你还未发布任何帖子，快去逛逛页面发帖吧！</p>
-        <el-card shadow="hover" v-for="blog in blogs" :key="blog.blogId">
+        <el-card :body-style="{ padding: '5px',width: '100%'}" shadow="hover" v-for="blog in blogs" :key="blog.blogId">
+          <div class="table-item-c">
         <router-link :to="{name: 'blogPage', params: {id: blog.blogId}}">
+          <div class="table-item">
           <img :src="$store.getters.imgUrl + blog.blogPicture" alt="activity-picture"/>
           <p>帖子名：{{blog.blogTitle}}</p>
           <p>帖子类型：{{blog.blogLabel}}</p>
           <p>发帖人：{{blog.blogPosterName}}</p>
           <p>帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
           <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
+            </div>
         </router-link>
-          <el-button type="danger" icon="el-icon-delete" circle  @click="deleteLoveBlog(blog.blogId)"></el-button>
-      </el-card>
+          <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteLoveBlog(blog.blogId)"></el-button>
+          </div>
+        </el-card>
       </el-tab-pane>
       <el-tab-pane label="我收藏的帖子" name="myLoveBlog">
         我收藏的帖子
         <p v-show="loveBlogs.length === 0">你还未收藏任何帖子，快去逛逛看吧！</p>
-        <el-card shadow="hover" v-for="blog in loveBlogs" :key="blog.blogId">
+        <el-card :body-style="{ padding: '5px',width: '100%'}" shadow="hover" v-for="blog in loveBlogs" :key="blog.blogId">
+          <div class="table-item-c">
           <router-link :to="{name: 'blogPage', params: {id: blog.blogId}}">
+            <div class="table-item">
             <img :src="$store.getters.imgUrl + blog.blogPicture" alt="activity-picture"/>
             <p>帖子名：{{blog.blogTitle}}</p>
             <p>帖子类型：{{blog.blogLabel}}</p>
             <p>发帖人：{{blog.blogPosterName}}</p>
             <p>帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
             <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
+              </div>
           </router-link>
-          <el-button type="danger" icon="el-icon-delete" circle  @click="deleteBlog(blog.blogId)"></el-button>
+          <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteBlog(blog.blogId)"></el-button>
+          </div>
         </el-card>
       </el-tab-pane>
       <el-tab-pane label="修改个人信息" name="myInfo">
         修改个人信息
-        <p>昵称：</p>
-        <input v-model="info.username" required/>
-        <p>邮箱：</p>
-        <input type="email" v-model="info.email" required/>
-        <p>个性签名；</p>
-        <input v-model="info.userSignature" type="text"/>
+        <div class="form1">
+        <div class="form-left">
+        <el-input class="item" v-model="info.username" required>
+           <template slot="prepend">昵称</template>
+        </el-input>
+          <el-input class="item" type="email" v-model="info.email" required>
+            <template slot="prepend">邮箱</template>
+          </el-input>
+          <el-input class="item" v-model="info.userSignature" type="text">
+            <template slot="prepend">个性签名</template>
+          </el-input>
+          <div class="item eitem">
+          <p class="key">用户年级：</p>
+        <el-select class="eselect" v-model="info.userGrade" placeholder="请选择">
+          <el-option
+            v-for="item in options"
+            :key="item"
+            :label="item"
+            :value="item">
+          </el-option>
+        </el-select>
+            </div>
+          <div class="item eitem">
+        <p class="key">性别：</p>
+            <div class="eradio">
+        <el-radio v-model="info.userSex" label=1>男</el-radio>
+        <el-radio v-model="info.userSex" label=0>女</el-radio>
+              </div>
+            </div>
+          <el-input class="item" type="text" v-model="info.userPrefer" >
+            <template slot="prepend">用户口味偏好</template>
+          </el-input>
+        </div>
+        <div class="form-right">
         <p>用户头像：</p>
         <el-upload action="https://jsonplaceholder.typicode.com/posts/" :limit="1" list-type="picture-card" :auto-upload="false"
 					:on-change='handleUpload' :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :file-list="fileList">
 					<i slot="default" class="el-icon-plus"></i>
           <template #tip>
-            <div class="el-upload__tip">只能上传一张图片，如不上传默认为原头像不变。</div>
+            <div class="el-upload__tip">只能上传一张图片，并且必须上传才能提交成功。</div>
           </template>
           <div slot="file" slot-scope="{ file }">
 						<img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
@@ -92,31 +136,24 @@
         </el-upload>
         <!--<p>学号：</p>
         <input v-model="info.userNumber" />-->
-        <p>用户年级</p>
-        <el-select v-model="info.userGrade" placeholder="请选择">
-          <el-option
-            v-for="item in options"
-            :key="item"
-            :label="item"
-            :value="item">
-          </el-option>
-        </el-select>
-        <p>性别：</p>
-        <el-radio v-model="info.userSex" label=1>男</el-radio>
-        <el-radio v-model="info.userSex" label=0>女</el-radio>
-        <p>用户的口味偏好：</p>
-        <input type="text" v-model="info.userPrefer" />
-        <button @click="updateUserInfo">确认修改信息</button>
+        <button @click="updateUserInfo" class="btn">确认修改信息</button>
+        </div>
+          </div>
       </el-tab-pane>
       <el-tab-pane label="修改密码" name="myPassword">
         修改密码
-        <p>原密码：</p>
-        <input v-model="password.old_password" type="password" placeholder="请输入原密码" required/>
-        <p>新密码：</p>
-        <input v-model="password.password" type="password" placeholder="请输入新密码" required/>
-        <p>确认密码：</p>
-        <input v-model="confirmPassword" type="password" placeholder="请再次输入新密码" required/>
-        <button @click="updateUserPassword">提交</button>
+        <div class="form2">
+        <el-input class="item" v-model="password.old_password" type="password" placeholder="请输入原密码" required>
+          <template slot="prepend">原密码</template>
+        </el-input>
+        <el-input class="item" v-model="password.password" type="password" placeholder="请输入新密码" required>
+          <template slot="prepend">新密码</template>
+        </el-input>
+        <el-input class="item" v-model="confirmPassword" type="password" placeholder="请再次输入新密码" required>
+          <template slot="prepend">确认密码</template>
+        </el-input>
+        <button @click="updateUserPassword" class="btn">提交</button>
+          </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -311,9 +348,12 @@ export default {
       })
     },
     updateUserInfo() {
-      let param = new FormData();  // 创建form对象
-      param.append("username", this.info.userName);
-      param.append("email", this.info.userEmail);
+      if (this.avatar_img == null) {
+        alert('您尚未上传用户头像无法提交');
+      } else {
+        let param = new FormData();  // 创建form对象
+      param.append("username", this.info.username);
+      param.append("email", this.info.email);
       param.append("userSignature", this.info.userSignature);
       param.append("userSex", this.info.userSex);
       param.append("userGrade", this.info.userGrade);
@@ -326,6 +366,7 @@ export default {
         alert('修改失败');
         console.log(JSON.stringify(error));
       })
+      }
     },
     updateUserPassword() {
       this.password.username = this.$store.getters.userinfo.username;
@@ -348,5 +389,83 @@ export default {
 </script>
 
 <style scoped>
+  .userTools {
+    width: 90%;
+  }
 
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .table-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    width: 1000px;
+    line-height: 100px;
+  }
+
+  .table-item-c {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .delete-btn {
+    width: 50px;
+    height: 50px;
+    margin: 25px 50px;
+  }
+
+
+  .form1 {
+    display: flex;
+    flex-direction: row;
+    padding: 0 calc(100% - 900px);
+  }
+
+  .form-left {
+    width: 500px;
+    justify-content: space-between;
+  }
+
+  .item {
+    margin: 5px;
+  }
+
+  .key {
+    text-align: left;
+  }
+
+  .eitem {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .form-right {
+    width: 400px;
+  }
+
+  .btn {
+    background-color: var(--orange);
+	background-image: linear-gradient(90deg, var(--orange) 0%, var(--lightorange) 74%);
+	border-radius: 20px;
+	border: 1px solid var(--orange);
+	color: var(--white);
+	cursor: pointer;
+	font-size: 0.8rem;
+	font-weight: bold;
+	letter-spacing: 0.1rem;
+	padding: 0.9rem 4rem;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+  }
+
+
+  .form2 {
+    width: 500px;
+    margin: auto;
+  }
 </style>

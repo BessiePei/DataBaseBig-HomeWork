@@ -4,13 +4,16 @@
       <input class="remark-input" v-model="content" placeholder="快来发表你的评论吧" />
       <button class="send-btn" @click="postRemark"><i class="el-icon-s-promotion"/>发布评论</button>
     </div>
-    <p v-else>请先登录再发表评论哦！</p>
+    <div v-else>
+      <el-divider></el-divider>
+      <p>请先登录再发表评论哦！</p>
+    </div>
     <p>相关评论</p>
     <div class="blogs">
       <el-card shadow="hover" v-for="remark in lists" :key="remark.commentId">
         <p>评论发布者：{{remark.commenter.username}}</p>
         <p>评论时间：{{remark.commentDeliverTime}}</p>
-        <p>评论内容：{{remark.commentContent}}</p>
+        <p class="word">评论内容：{{remark.commentContent}}</p>
       </el-card>
     </div>
   </div>
@@ -36,12 +39,12 @@ export default {
       content: '',
       lists: [{
         commentId: 999,
-        commentContent: 'xxx',
+        commentContent: 'xxxffffsdvhjlkjbjjkl;lknl;llmn;lskuegbvjrlsbvssbjbjbd,vsb,fb,svbmvfdsvfsbdgfnbdsdvasfbsawcegercert',
         commenter: {
           username: "小碗菜21",
           email: "125346@qq.com"
         },
-        commentDeliverTime: 'xxx-xxx-xx 00:00',
+        commentDeliverTime: "2022-12-17T11:22:57.575941Z",
       }],
     }
   },
@@ -131,7 +134,7 @@ export default {
     /* ES6 使用辅助函数mapGetters，将组件中的方法映射为score.getters调用 */
     ...mapGetters({
       userinfo: "userinfo",
-    })
+    }),
   }
 }
 </script>
@@ -141,6 +144,8 @@ export default {
     width: 700px;
     margin: auto;
     text-align: left;
+    /* position: relative;
+    top: 20px; */
   }
 
   .remark-input {
@@ -164,4 +169,8 @@ export default {
 	  transition: transform 80ms ease-in;
   }
 
+  .word {
+    word-break: break-word;
+    white-space: pre-line;
+  }
 </style>
