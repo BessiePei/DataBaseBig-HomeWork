@@ -67,8 +67,9 @@ export default {
         }).then((data)=>{
           console.log(data);
           console.log(this.blog);
-          this.blog.day_time=this.blog.blogDeliverTime.slice(0,10),
-          this.blog.min_time=this.blog.blogDeliverTime.slice(11,16)
+          this.blog.day_time=this.blog.blogDeliverTime.slice(0,10);
+          this.blog.min_time=this.blog.blogDeliverTime.slice(11,16);
+          console.log(this.blog);
         })
       }
     }
