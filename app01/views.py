@@ -47,6 +47,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class UserView(ViewSet):
     permission_classes = (IsAuthenticated,)
+
     # permission_classes = (IsNotAuthenticated,)
 
     def get_item(self, request):
@@ -100,13 +101,18 @@ class UserView(ViewSet):
     def deleteUserDish(self, request, pk):
         user = MyUser.objects.get(user_ab=request.user)
         info = user.userFavoriteDishes.remove(pk)
+        tgt = Dish.objects.get(dishId=pk)
+        tgt.dishFollowerCnt = tgt.dishFollowerCnt - 1
+        tgt.save()
         # todo 返回值？
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def deleteUserActivity(self, request, pk):
         user = MyUser.objects.get(user_ab=request.user)
         info = user.userActivities.remove(pk)
-        # todo 返回值？
+        tgt = Activity.objects.get(activityId=pk)
+        tgt.activityPersonCnt = tgt.activityPersonCnt - 1
+        tgt.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def getUserBlog(self, request):
@@ -127,10 +133,12 @@ class UserView(ViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def deleteUserLoveBlog(self, request, pk):
-        # user = MyUser.objects.get(user_ab=request.user)
-        # info = user.userFavoriteBlogs.remove(pk)
-        tgt = Blog.objects.get(blogId=pk).delete()
-        # todo 返回值？
+        user = MyUser.objects.get(user_ab=request.user)
+        info = user.userFavoriteBlogs.remove(pk)
+        tgt = Blog.objects.get(blogId=pk)
+        tgt.blogFavoriterCnt = tgt.blogFavoriterCnt - 1
+        tgt.save()
+        print(user.userFavoriteBlogs.all())
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def submitFeedBack(self, request):

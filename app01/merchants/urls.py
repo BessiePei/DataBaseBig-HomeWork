@@ -24,7 +24,7 @@ urlpatterns = [
     path('merchant/1/dishes/<int:pk>/', MerchantViewSet.as_view({
         "delete": "deleteMerchantDish",  # function deleteMerchantDish()
     })),
-    path('merchant/1/activity/<int:pk>/', MerchantViewSet.as_view({
+    path('merchant/1/activities/<int:pk>/', MerchantViewSet.as_view({
         "delete": "deleteMerchantActivity",  # function deleteMerchantDish()
     })),
     path('merchant/dishes/', MerchantViewSet.as_view({

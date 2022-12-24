@@ -66,7 +66,8 @@ class MerchantViewSet(ViewSet):
         # todo 返回信息？
         merchant = Merchant.objects.get(user_ab=request.user)
         activity = Activity.objects.get(activityId=pk)
-        if activity.launcher == request.user:
+        print(activity.activityName)
+        if activity.user_ab == request.user:
             activity.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
