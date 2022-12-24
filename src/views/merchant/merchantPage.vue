@@ -228,7 +228,8 @@ export default {
       param.append("dishPrice", this.dish.dishPrice);
       param.append("dishPicture", this.dish.dishPicture);
       param.append("dishRaw", this.dish.dishRaw);
-      param.append("dishTaste", this.dish.dishRaw);
+      param.append("dishTaste", this.dish.dishTaste);
+      param.append("dishBrief", this.dish.dishBrief)
       if (this.userinfo) {
         param.append("dishSeller", this.userinfo.username);
         console.log(param);
