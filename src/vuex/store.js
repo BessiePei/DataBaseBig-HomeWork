@@ -43,6 +43,10 @@ const mutations = {
         }
       }
       document.cookie = null;
+      state.token = '',
+			state.userInfo = {},
+			localStorage.setItem("token", ''),
+			sessionStorage.setItem("userInfo", JSON.stringify(''))
   },
 }
 
