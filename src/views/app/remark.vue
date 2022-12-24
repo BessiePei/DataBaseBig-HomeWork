@@ -84,7 +84,7 @@ export default {
     },
     postRemark() {
       if (this.source === 'blog') {
-        postBlogRemark(this.id, this.content).then((response)=>{
+        postBlogRemark(this.id, {commentContent: this.content}).then((response)=>{
           alert('提交成功');
           this.lists.unshift(response.data);
           // this.$router.go(0);
@@ -93,7 +93,7 @@ export default {
           console.log(JSON.stringify(error));
         })
       } else if (this.source === 'dish') {
-        postDishRemark(this.id, this.content).then((response)=>{
+        postDishRemark(this.id, {commentContent: this.content}).then((response)=>{
           alert('提交成功');
           this.lists.unshift(response.data);
           // this.$router.go(0);
@@ -102,7 +102,7 @@ export default {
           console.log(JSON.stringify(error));
         })
       } else if (this.source === 'activity') {
-        postActivityRemark(this.id, this.content).then((response)=>{
+        postActivityRemark(this.id, {commentContent: this.content}).then((response)=>{
           alert('提交成功');
           this.lists.unshift(response.data);
           // this.$router.go(0);

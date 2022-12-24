@@ -8,7 +8,7 @@
       <p>帖子类型：{{blog.blogLabel}}</p>
       <p>发帖人：{{blog.blogPosterName}}</p>
       <p>帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
-      <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
+      <!--<p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>-->
       <p>帖子发布时间：{{blog.day_time}} {{blog.min_time}}</p>
       <favorite-button :source="'blog'" :id="id"></favorite-button>
       </div>

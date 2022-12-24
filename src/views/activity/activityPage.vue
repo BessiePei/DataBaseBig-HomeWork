@@ -86,6 +86,7 @@ export default {
         joinIn(this.id, this.userinfo).then((response) => {
           //console.log(response.data);
           alert('参与成功');
+          this.activity.activityPersonCnt = this.activity.activityPersonCnt + 1;
         })
         .catch(function (error) {
           alert('参与失败');

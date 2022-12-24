@@ -27,7 +27,7 @@
     <div class="buttons">
         <router-link :to="{path: '/visit'}"><button class="router-btn btn">逛逛</button></router-link>
       <div class="login" v-if="userinfo">
-          <div v-if="userinfo.isMerchant">
+        <div v-if="userinfo.isMerchant">
             <router-link :to="{name: 'merchantPage', params: {id: userinfo.id}}">
               <button class="router-btn btn" >用户{{ userinfo.username }}</button>
             </router-link>
