@@ -67,6 +67,9 @@ option = {
 };
 */
   myChart.setOption({
+    legend: {
+    top: 'bottom'
+  },
   title: {
     text: '收藏菜品分类统计',
     left: 'center',

@@ -53,7 +53,7 @@
           <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
             </div>
         </router-link>
-          <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteLoveBlog(blog.blogId)"></el-button>
+          <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteBlog(blog.blogId)"></el-button>
           </div>
         </el-card>
       </el-tab-pane>
@@ -72,7 +72,7 @@
             <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
               </div>
           </router-link>
-          <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteBlog(blog.blogId)"></el-button>
+          <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteLoveBlog(blog.blogId)"></el-button>
           </div>
         </el-card>
       </el-tab-pane>
