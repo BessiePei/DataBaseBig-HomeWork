@@ -67,4 +67,6 @@
   flex-direction: row;
 }
 
-
+.login {
+  width: 300px;
+}

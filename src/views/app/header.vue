@@ -26,7 +26,7 @@
     </div>
     <div class="buttons">
         <router-link :to="{path: '/visit'}"><button class="router-btn btn">逛逛</button></router-link>
-        <div class="login" v-if="userinfo">
+      <div class="login" v-if="userinfo">
           <div v-if="userinfo.isMerchant">
             <router-link :to="{name: 'merchantPage', params: {id: userinfo.id}}">
               <button class="router-btn btn" >用户{{ userinfo.username }}</button>
@@ -50,6 +50,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import {CPopover, CPopoverContent, CPopoverTrigger, CPopoverArrow} from "@chakra-ui/vue";
+import {postLogout} from "../../api/users";
 export default {
   name: "header",
   data() {
@@ -64,9 +65,10 @@ export default {
       console.log("退出中。。。");
       this.$cookies.set("sessionid", "xxx");
       this.$cookies.isKey("sessionid");
-      this.$cookies.remove("sessionid")
+      this.$cookies.remove("sessionid");
+      postLogout();
       this.$store.dispatch("delUser");
-      this.$router.push("/"); //跳转到首页
+      this.$router.push({name: 'index'}); //跳转到首页
     },
     searches() {
       const _this = this;

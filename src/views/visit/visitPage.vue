@@ -195,6 +195,7 @@ export default {
       param.append("blogPicture", this.form.picture);
       param.append("blogPrivate", this.form.private);
       console.log(this.form.private);
+      console.log(this.form.picture);
       if (this.userinfo) {
         param.append("blogPosterName", this.userinfo.username);
         console.log(param);
@@ -220,7 +221,7 @@ export default {
 			this.form.picture = file.raw;
 		},
 		handleUpload(file) {
-			this.form.private = file.raw;
+			this.form.picture = file.raw;
 			console.log(file);
     },
   },

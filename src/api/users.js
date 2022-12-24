@@ -114,4 +114,12 @@ export function getChart() {
   })
 }
 
+export function postLogout() {
+  return request({
+    url: '/users/1/logout',
+    methods: 'post'
+  })
+}
+
+
 
