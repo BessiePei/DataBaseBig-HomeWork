@@ -203,6 +203,7 @@ export default {
   },
   created() {
     this.content = this.$route.params.content;
+    console.log("create" + this.content);
     searchContent({search: this.content}).then((response) => {
           //console.log(response.data);
           this.result = response.data;
@@ -217,6 +218,15 @@ export default {
   },
   updated() {
     this.content = this.$route.params.content;
+     console.log("update" + this.content);
+  },
+  watch: {
+    $route: {
+      handler: function(newl, oldl) {
+        this.getShowData();
+      }
+    }
+
   }
 }
 </script>

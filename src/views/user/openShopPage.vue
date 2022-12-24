@@ -198,8 +198,8 @@ export default {
             // console.log(this.$store.user.id);
             this.$router.push("/"); //跳转到首页
             */
-            alert('注册成功，请返回首页进行登录');
             this.$router.push("/");
+            alert('注册成功，请返回首页进行登录');
           }
         })
         .catch(function (error) {
