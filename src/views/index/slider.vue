@@ -103,7 +103,7 @@ export default {
       } else {
         getMerchantActivities(this.id).then((response) => {
           //console.log(response.data);
-          this.lists = response.data.merchantActivities;
+          this.lists = response.data;
           console.log("merchant activities " + JSON.stringify(this.lists));
         })
         .catch(function (error) {

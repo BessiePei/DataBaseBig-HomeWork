@@ -5,8 +5,8 @@ Vue.use(Vuex)
 
 const state = {
   count: 10,
-  imgUrl: "",
-  /* imgUrl: "http://localhost:8000", */
+  //imgUrl: "",
+  imgUrl: "http://localhost:8000",
   userinfo: localStorage["userinfo"]?
     JSON.parse(localStorage["userinfo"]):null,
 }
