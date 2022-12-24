@@ -58,10 +58,9 @@ class ActivityModelViewSet(viewsets.ModelViewSet):
         comment.save()
 
         item = ActivityCommentSerializer(instance=comment, data=request.data, partial=True)
-        print("yes")
         if item.is_valid():
             item.save()
-            print("return")
+            print(item.data)
             return Response(item.data)
         else:
             print(item.errors)

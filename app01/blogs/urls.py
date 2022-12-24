@@ -15,7 +15,7 @@ urlpatterns = [
         "post": "add_item"  # sendBlog
     })),
     path("blog/<int:pk>/", BlogViewSet.as_view({
-        "get": "get_one_item",  # function getBlogById(id)
+        "get": "get_one_item",  # function getBlogById(id)  # 发帖人 blogPostName
         # "put": "edit_item",
         # "delete": "delete",
     })),
