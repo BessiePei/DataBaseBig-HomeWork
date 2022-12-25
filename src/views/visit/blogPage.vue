@@ -9,7 +9,7 @@
       <p>发帖人：{{blog.blogPosterName}}</p>
       <p>帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
       <!--<p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>-->
-      <p>帖子发布时间：{{blog.day_time}} {{blog.min_time}}</p>
+      <p>帖子发布时间：{{blog.blogDeliverTime.slice(0,10)}} {{blog.blogDeliverTime.slice(11,16)}}</p>
       <favorite-button :source="'blog'" :id="id"></favorite-button>
       </div>
     </div>
@@ -50,8 +50,6 @@ export default {
         blogLikeCnt: 0,
         blogDeliverTime: '2022-12-15T14:04:59.643933Z',
         blogContent: 'akvsduvgdfkhfksegbfdgnefsdgnfggsdgnregnhfgsfdgfsdsdhrtgeshrteesshrnthrsgfrtrgeaehth',
-        day_time: '2022-12-15',
-        min_time: '14:04',
       },
     }
   },
@@ -66,11 +64,15 @@ export default {
           this.blog = response.data;
         }).then((data)=>{
           console.log(data);
-          console.log(this.blog);
+         /*  console.log(this.blog);
           this.blog.day_time=this.blog.blogDeliverTime.slice(0,10);
           this.blog.min_time=this.blog.blogDeliverTime.slice(11,16);
-          console.log(this.blog);
+          console.log(this.blog);*/
         })
+       /* console.log(this.blog);
+          this.blog.day_time=this.blog.blogDeliverTime.slice(0,10);
+          this.blog.min_time=this.blog.blogDeliverTime.slice(11,16);
+          console.log(this.blog); */
       }
     }
   },
