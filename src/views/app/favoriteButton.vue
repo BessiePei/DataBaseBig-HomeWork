@@ -21,7 +21,11 @@ export default {
       if (this.userinfo) {
         if (this.source === 'blog') {
           favoriteBlog(this.id, this.userinfo).then((response) => {
-            alert('收藏成功');
+            if (response.data.status === 1) {
+              alert('收藏成功');
+            } else if (response.data.status === 0) {
+              alert('您已经收藏过此帖');
+            }
             this.$router.go(0);
           }).catch(function (error) {
             alert('收藏失败');
@@ -29,7 +33,11 @@ export default {
           })
         } else if (this.source === 'dish') {
           favoriteDish(this.id, this.userinfo).then((response) => {
-            alert('收藏成功');
+            if (response.data.status === 1) {
+              alert('收藏成功');
+            } else if (response.data.status === 0) {
+              alert('您已经收藏过此菜品');
+            }
             this.$router.go(0);
           }).catch(function (error) {
             alert('收藏失败');

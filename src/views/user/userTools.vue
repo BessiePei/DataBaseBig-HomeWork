@@ -50,7 +50,7 @@
           <p>帖子类型：{{blog.blogLabel}}</p>
           <p>发帖人：{{blog.blogPosterName}}</p>
           <p>帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
-          <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
+          <!--<p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>-->
             </div>
         </router-link>
           <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteBlog(blog.blogId)"></el-button>
@@ -69,7 +69,7 @@
             <p>帖子类型：{{blog.blogLabel}}</p>
             <p>发帖人：{{blog.blogPosterName}}</p>
             <p>帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
-            <p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>
+            <!--<p>帖子喜爱人数：{{blog.blogLikeCnt}}</p>-->
               </div>
           </router-link>
           <el-button class="delete-btn" type="danger" icon="el-icon-delete" circle  @click="deleteLoveBlog(blog.blogId)"></el-button>
@@ -312,6 +312,7 @@ export default {
         this.dishes = this.dishes.filter(function (item) {
           return item.dishId !== id;
         });
+        this.$router.go(0);
       }).catch(function (error){
         alert("删除失败");
         console.log(error)
@@ -411,6 +412,7 @@ export default {
     display: flex;
     flex-direction: row;
     width: 100%;
+    overflow: auto;
   }
 
   .delete-btn {

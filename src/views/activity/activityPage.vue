@@ -85,7 +85,11 @@ export default {
       if (this.checked) {
         joinIn(this.id, this.userinfo).then((response) => {
           //console.log(response.data);
-          alert('参与成功');
+          if (response.data.status === 1) {
+            alert('参与成功');
+          } else if (response.data.status === 0) {
+            alert('您已经参加过这个活动了')
+          }
           this.activity.activityPersonCnt = this.activity.activityPersonCnt + 1;
         })
         .catch(function (error) {

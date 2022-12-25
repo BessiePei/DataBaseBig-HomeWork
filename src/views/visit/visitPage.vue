@@ -14,7 +14,7 @@
             <p class="card-info">帖子类型：{{blog.blogLabel}}</p>
             <p class="card-info">发帖人：{{blog.blogPosterName}}</p>
             <p class="card-info">帖子收藏人数：{{blog.blogFavoriterCnt}}</p>
-            <p class="card-info">帖子喜爱人数：{{blog.blogLikeCnt}}</p>
+            <!--<p class="card-info">帖子喜爱人数：{{blog.blogLikeCnt}}</p>-->
           </div>
         </router-link>
       </el-card>
