@@ -68,15 +68,19 @@ class BlogViewSet(ViewSet):
 
     def favoriteBlog(self, request, pk):
         user = MyUser.objects.get(user_ab=request.user)
-        user.userFavoriteBlogs.add(pk)
-        # print(user.userFavoriteBlogs.all().first().blogId)
-        user.save()
-        blog = Blog.objects.get(blogId=pk)
-        blog.blogFavoriterCnt += 1
-        blog.save()
-        ser = UserSerializer(user)
-
-        return Response(ser.data)
+        if not user.userFavoriteBlogs.filter(blogId=pk).exists():
+            user.userFavoriteBlogs.add(pk)
+            # print(user.userFavoriteBlogs.all().first().blogId)
+            user.save()
+            blog = Blog.objects.get(blogId=pk)
+            blog.blogFavoriterCnt += 1
+            blog.save()
+            return Response(data={"status": 1})
+        else:
+            return Response(data={"status": 0})
+        # ser = UserSerializer(user)
+        #
+        # return Response(ser.data)
 
     def edit_item(self, request, pk):
         instance = Blog.objects.get(blogId=pk)

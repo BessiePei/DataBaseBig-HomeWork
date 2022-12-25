@@ -30,20 +30,34 @@ class ActivityModelViewSet(viewsets.ModelViewSet):
     def userJoinInActivity(self, request, pk):
 
         user = MyUser.objects.filter(user_ab=request.user)
+        print("join" + str(pk))
         if user.exists():
             user_obj = user[0]
-            user_obj.userActivities.add(pk)
-            user_obj.save()
-            ser = UserSerializer(user_obj)
+            if not user_obj.userActivities.filter(activityId=pk).exists():
+                print("add ? ")
+                user_obj.userActivities.add(pk)
+                user_obj.save()
+                ser = UserSerializer(user_obj)
+                instance = Activity.objects.get(activityId=pk)
+                instance.activityPersonCnt += 1
+                instance.save()
+                return Response(data={"status": 1})
+            else:
+                return Response(data={"status": 0})
         else:
             merchant_obj = Merchant.objects.get(user_ab_id=request.user.id)
-            merchant_obj.merchantActivities.add(pk)
-            merchant_obj.save()
-            ser = MerchantSerializer(merchant_obj)
-        instance = Activity.objects.get(activityId=pk)
-        instance.activityPersonCnt += 1
-        instance.save()
-        return Response(data=ser.data)
+            print("add ? ")
+            if not merchant_obj.merchantActivities.filter(activityId=pk).exists():
+                print("add ? ")
+                merchant_obj.merchantActivities.add(pk)
+                merchant_obj.save()
+                ser = MerchantSerializer(merchant_obj)
+                instance = Activity.objects.get(activityId=pk)
+                instance.activityPersonCnt += 1
+                instance.save()
+                return Response(data={"status": 1})
+            else:
+                return Response(data={"status": 0})
 
     @action(methods=['get'], detail=True, url_path='remark')
     def getActivityComments(self, request, pk):

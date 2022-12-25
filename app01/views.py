@@ -134,6 +134,11 @@ class UserView(ViewSet):
 
     def deleteUserLoveBlog(self, request, pk):
         user = MyUser.objects.get(user_ab=request.user)
+        print(pk)
+        if user.userFavoriteBlogs.filter(blogId=pk).exists():
+            print("yes")
+        else:
+            print("no")
         info = user.userFavoriteBlogs.remove(pk)
         tgt = Blog.objects.get(blogId=pk)
         tgt.blogFavoriterCnt = tgt.blogFavoriterCnt - 1

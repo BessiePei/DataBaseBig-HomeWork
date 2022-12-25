@@ -69,13 +69,15 @@ class DishViewSet(ViewSet):
 
     def favoriteDish(self, request, pk):
         user = MyUser.objects.get(user_ab=request.user)
-        user.userFavoriteDishes.add(pk)
-        user.save()
-        ser = UserSerializer(user)
-        dish = Dish.objects.get(dishId=pk)
-        dish.dishFollowerCnt += 1
-        dish.save()
-        return Response(ser.data)
+        if not user.userFavoriteDishes.filter(dishId=pk):
+            user.userFavoriteDishes.add(pk)
+            user.save()
+            dish = Dish.objects.get(dishId=pk)
+            dish.dishFollowerCnt += 1
+            dish.save()
+            return Response(data={"status": 1})
+        else:
+            return Response(data={"status": 0})
 
     def edit_item(self, request, pk):
         instance = Dish.objects.get(dishId=pk)
