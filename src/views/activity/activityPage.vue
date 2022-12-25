@@ -87,10 +87,11 @@ export default {
           //console.log(response.data);
           if (response.data.status === 1) {
             alert('参与成功');
+            this.activity.activityPersonCnt = this.activity.activityPersonCnt + 1;
           } else if (response.data.status === 0) {
             alert('您已经参加过这个活动了')
           }
-          this.activity.activityPersonCnt = this.activity.activityPersonCnt + 1;
+
         })
         .catch(function (error) {
           alert('参与失败');
