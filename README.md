@@ -1,4 +1,4 @@
-# 数据库大作业文档
-
-前端分支front
+# DataBase Homework
+ a carteen platform building.
+ frontend and backend code can be found in different branches. 
 
